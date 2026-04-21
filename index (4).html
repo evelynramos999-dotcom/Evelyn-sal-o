@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#111111">
+<title>Evelyn Ramos · Cabeleireira</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --pr:#111;--gold:#C9A84C;--goldC:#FBF5E6;
+  --bg:#F7F5F2;--border:#E8E4DF;
+  --txt:#1a1a1a;--txt2:#666;--txt3:#aaa;
+  --verde:#1B5E20;--verdeC:#E8F5E9;
+  --roxo:#4A148C;--roxoC:#EDE7F6;
+  --ambar:#E65100;--ambarC:#FFF3E0;
+  --verm:#B71C1C;--vermC:#FFEBEE;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden}
+input,select,textarea,button{font-family:'Inter',sans-serif;font-size:15px}
+input,select,textarea{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:12px;background:#fff;color:var(--txt);outline:none;transition:border .2s;-webkit-appearance:none}
+input:focus,select:focus,textarea:focus{border-color:var(--pr)}
+textarea{resize:vertical;min-height:80px;line-height:1.5}
+.btn{display:block;width:100%;padding:16px;border:none;border-radius:14px;font-size:15px;font-weight:600;cursor:pointer;text-align:center;transition:all .15s}
+.btn:active{transform:scale(.97)}
+.btn-pr{background:var(--pr);color:#fff}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-sec{background:#f0ece6;color:#444}
+.btn-g{background:var(--verde);color:#fff}
+.btn-sm{display:inline-flex;align-items:center;padding:6px 12px;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;gap:4px;white-space:nowrap}
+.btn-sm:active{opacity:.8}
+.page{display:none;min-height:100vh}
+.page.ativa{display:block}
+
+/* LOGO */
+.er-logo{display:inline-flex;flex-direction:column;align-items:center;gap:2px}
+.er-initials{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;letter-spacing:-3px;line-height:1}
+.er-name{font-size:9px;letter-spacing:5px;text-transform:uppercase;opacity:.6}
+
+/* HERO */
+.hero{background:var(--pr);color:#fff;padding:40px 20px 32px;text-align:center}
+.gold-line{width:36px;height:2px;background:var(--gold);margin:10px auto 12px;border-radius:1px}
+
+/* STEPS */
+.steps-bar{display:flex;gap:6px;padding:14px 20px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+.step-dot{flex:1;height:3px;border-radius:2px;background:var(--border);transition:background .3s}
+.step-dot.on{background:var(--pr)}
+.step-lbl{display:flex;align-items:center;gap:8px;padding:14px 20px 6px;font-size:13px;font-weight:600;color:var(--txt2)}
+.step-num{width:22px;height:22px;border-radius:50%;background:var(--pr);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+
+/* CATÁLOGO */
+.cat-sec{padding:0 16px 80px}
+.cat-tit{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin:20px 0 10px;padding-bottom:8px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.cat-tit::before{content:'';width:3px;height:16px;background:var(--gold);border-radius:2px;display:block}
+.scard{background:#fff;border:1.5px solid var(--border);border-radius:16px;margin-bottom:12px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.scard:active{transform:scale(.98)}
+.scard.sel{border-color:var(--pr)}
+.scard-body{padding:14px 16px}
+.scard-nome{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-bottom:5px;line-height:1.3}
+.scard-desc{font-size:12px;color:var(--txt2);line-height:1.6;margin-bottom:10px}
+.scard-foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.scard-preco{font-family:'Playfair Display',serif;font-size:19px;font-weight:700}
+.scard-tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;background:#f0ece6;color:#555}
+.tag-gold{background:var(--goldC);color:#7a5c00}
+.sel-check{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;background:var(--pr);color:#fff;display:none;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.scard.sel .sel-check{display:flex}
+
+/* BARRA INFERIOR */
+.sel-bar{background:var(--pr);color:#fff;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;position:fixed;bottom:0;left:0;right:0;z-index:60;cursor:pointer}
+.sel-bar-nome{font-size:13px;font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:12px}
+.sel-bar-btn{background:var(--gold);color:#fff;border:none;border-radius:10px;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;flex-shrink:0}
+
+/* FORM */
+.form-body{padding:18px 18px 24px}
+.campo{margin-bottom:14px}
+.campo label{display:block;font-size:11px;font-weight:600;color:var(--txt2);margin-bottom:5px;letter-spacing:.3px;text-transform:uppercase}
+.horas-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.h-btn{padding:12px 4px;border:1.5px solid var(--border);border-radius:10px;background:#fff;font-size:13px;font-weight:500;cursor:pointer;text-align:center;color:var(--txt);transition:all .2s}
+.h-btn.sel{background:var(--pr);color:#fff;border-color:var(--pr)}
+.aviso-box{background:var(--goldC);border:1px solid #e8c96b;border-radius:14px;padding:16px;margin-bottom:16px}
+.aviso-tit{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;margin-bottom:10px}
+.aviso-item{font-size:12px;color:var(--txt2);line-height:1.7;padding-left:14px;position:relative;margin-bottom:4px}
+.aviso-item::before{content:'→';position:absolute;left:0;color:var(--gold);font-weight:700}
+
+/* CONFIRMAÇÃO */
+.conf-hero{background:var(--pr);color:#fff;padding:28px 22px;text-align:center}
+.conf-icon{font-size:44px;margin-bottom:10px}
+.conf-tit{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:14px}
+.conf-det{background:rgba(255,255,255,.1);border-radius:12px;padding:14px 16px;font-size:13px;text-align:left}
+.conf-det-row{display:flex;flex-direction:column;margin-bottom:10px}
+.conf-det-row:last-child{margin-bottom:0}
+.conf-det-label{font-size:10px;opacity:.5;letter-spacing:.5px;text-transform:uppercase;margin-bottom:2px}
+.conf-det-val{font-size:14px;font-weight:600}
+.end-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px 16px;text-align:center;font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:12px}
+
+/* SOBRE */
+.sobre-card{background:#fff;margin:0 16px 16px;border-radius:16px;border:1px solid var(--border);overflow:hidden}
+.sobre-body{padding:18px}
+.sobre-tit{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:3px}
+.sobre-sub{font-size:11px;color:var(--gold);font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.sobre-txt{font-size:13px;color:var(--txt2);line-height:1.8}
+
+/* ADMIN */
+.admin-wrap{display:flex;min-height:100vh}
+.sidebar{width:210px;background:var(--pr);display:flex;flex-direction:column;flex-shrink:0;position:fixed;top:0;left:0;height:100vh;z-index:100;overflow-y:auto}
+.sb-logo{padding:18px 16px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sb-er{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:#fff;letter-spacing:-1px}
+.sb-sub{font-size:10px;color:rgba(255,255,255,.3);letter-spacing:3px;margin-top:2px;text-transform:uppercase}
+.sb-gold{width:22px;height:2px;background:var(--gold);margin-top:8px;border-radius:1px}
+nav{padding:10px 8px;flex:1}
+.nav-btn{display:block;width:100%;text-align:left;padding:9px 12px;border:none;background:none;color:rgba(255,255,255,.5);font-size:13px;cursor:pointer;border-radius:8px;margin-bottom:2px;transition:all .2s}
+.nav-btn:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.85)}
+.nav-btn.ativo{background:rgba(255,255,255,.13);color:#fff;font-weight:600}
+.sb-foot{padding:12px 14px;border-top:1px solid rgba(255,255,255,.08)}
+.admin-main{margin-left:210px;padding:28px 30px;flex:1;min-width:0}
+.pg-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;gap:12px}
+.pg-tit{font-family:'Playfair Display',serif;font-size:21px;font-weight:700}
+.pg-sub{font-size:13px;color:var(--txt2);margin-top:3px}
+.acard{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px}
+.acard-tit{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;margin-bottom:12px}
+.metrics{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.metric{background:#f8f5f0;border-radius:12px;padding:12px 14px;flex:1;min-width:110px}
+.m-l{font-size:10px;color:var(--txt2);margin-bottom:3px;text-transform:uppercase;letter-spacing:.5px}
+.m-v{font-size:19px;font-weight:700;font-family:'Playfair Display',serif}
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 9px;border-radius:20px}
+.b-ag{background:var(--ambarC);color:var(--ambar)}
+.b-conc{background:var(--verdeC);color:var(--verde)}
+.b-canc{background:var(--vermC);color:var(--verm)}
+.b-pago{background:var(--verdeC);color:var(--verde)}
+.b-pend{background:var(--ambarC);color:var(--ambar)}
+.b-fiado{background:var(--roxoC);color:var(--roxo)}
+.b-troca{background:#E3F2FD;color:#0D47A1}
+.b-atend{background:var(--roxoC);color:var(--roxo)}
+.b-al{background:var(--vermC);color:var(--verm)}
+.row{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid #f5f2ee;flex-wrap:wrap}
+.row:last-child{border-bottom:none}
+.av{width:36px;height:36px;border-radius:50%;background:var(--pr);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;font-family:'Playfair Display',serif}
+.r-main{flex:1;min-width:0}
+.r-nome{font-size:13px;font-weight:600}
+.r-sub{font-size:11px;color:var(--txt2);margin-top:2px}
+.isml{padding:9px 12px;font-size:13px;border-radius:10px;border:1.5px solid var(--border);background:#fff;outline:none;width:100%;transition:border .2s;-webkit-appearance:none}
+.isml:focus{border-color:var(--pr)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.ca{margin-bottom:10px}
+.ca label{display:block;font-size:11px;font-weight:600;color:var(--txt2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.3px}
+.filtros{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.fbtn{padding:7px 14px;border:1.5px solid var(--border);border-radius:20px;background:#fff;font-size:12px;cursor:pointer;font-weight:500;color:var(--txt);transition:all .2s}
+.fbtn.on{background:var(--pr);color:#fff;border-color:var(--pr)}
+.alrt{border-radius:12px;padding:10px 14px;font-size:12px;margin-bottom:10px;font-weight:500}
+.alrt-v{background:var(--vermC);color:var(--verm)}
+.alrt-a{background:var(--ambarC);color:var(--ambar)}
+.alrt-g{background:var(--goldC);color:#7a5c00}
+.bbar{flex:1;height:7px;background:#e8e4df;border-radius:4px;overflow:hidden}
+.bfill{height:7px;border-radius:4px;transition:width .4s}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.pop{padding:11px;border:1.5px solid var(--border);border-radius:10px;background:#fff;font-size:12px;font-weight:500;cursor:pointer;text-align:center;color:var(--txt);transition:all .2s}
+.pop.on{background:var(--pr);color:#fff;border-color:var(--pr)}
+.prow{display:flex;justify-content:space-between;font-size:13px;padding:3px 0;color:var(--txt2)}
+.ptot{display:flex;justify-content:space-between;font-size:16px;font-weight:700;color:var(--verde);border-top:1px solid var(--border);padding-top:9px;margin-top:5px}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;align-items:center;justify-content:center;padding:16px}
+.modal-bg.aberto{display:flex}
+.mbox{background:#fff;border-radius:20px;padding:24px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto}
+.mhdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.mtit{font-family:'Playfair Display',serif;font-size:16px;font-weight:700}
+.bx{background:none;border:none;font-size:22px;cursor:pointer;color:#aaa;line-height:1}
+.hlinha{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #f8f5f0;align-items:flex-start}
+.hl{font-size:12px;color:var(--txt3);min-width:48px;font-weight:600;padding-top:3px}
+.pmeta{height:12px;background:#e8e4df;border-radius:6px;overflow:hidden;margin:6px 0}
+.pfill{height:12px;border-radius:6px;background:var(--pr);transition:width .5s}
+.login-pg{min-height:100vh;background:var(--pr);display:flex;align-items:center;justify-content:center;padding:20px}
+.login-card{background:#fff;border-radius:20px;padding:38px 28px;max-width:360px;width:100%;text-align:center}
+
+@media(max-width:768px){
+  .sidebar{width:100%;height:auto;position:relative}
+  .admin-main{margin-left:0;padding:14px}
+  .admin-wrap{flex-direction:column}
+  .g2,.g3{grid-template-columns:1fr}
+  nav{display:flex;padding:6px 8px;overflow-x:auto;flex-wrap:nowrap}
+  .nav-btn{white-space:nowrap;padding:8px 11px;font-size:12px;flex-shrink:0}
+}
+@media(max-width:400px){
+  .horas-grid{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════
+     TELA CLIENTE
+════════════════════════════════ -->
+<div id="pg-cliente" class="page ativa">
+  <!-- Hero -->
+  <div class="hero">
+    <div class="er-logo" style="color:#fff;margin-bottom:10px">
+      <div class="er-initials">ER</div>
+      <div class="er-name">Evelyn Ramos</div>
+    </div>
+    <div class="gold-line"></div>
+    <div style="font-size:11px;letter-spacing:4px;text-transform:uppercase;opacity:.5;margin-bottom:6px">Cabeleireira · São Carlos SP</div>
+    <div style="font-size:13px;opacity:.5;font-size:12px">6 anos de experiência · Especialista em fios</div>
+  </div>
+
+  <!-- Steps -->
+  <div class="steps-bar">
+    <div class="step-dot on" id="s1"></div>
+    <div class="step-dot" id="s2"></div>
+    <div class="step-dot" id="s3"></div>
+    <div class="step-dot" id="s4"></div>
+  </div>
+
+  <!-- STEP 1: Serviços -->
+  <div id="step1">
+    <div class="step-lbl"><div class="step-num">1</div>Escolha seu serviço</div>
+
+    <div class="sobre-card">
+      <div class="sobre-body">
+        <div class="sobre-tit">Oi, eu sou a Evelyn Ramos</div>
+        <div class="sobre-sub">Sua cabeleireira</div>
+        <div class="sobre-txt">29 anos, mais de 6 anos de experiência no mundo da beleza. Meu foco é criar um vínculo real com cada cliente — com técnica, transparência e resultado. <strong>Será um prazer atender você! 💕</strong></div>
+      </div>
+    </div>
+
+    <div class="cat-sec" id="catalogo"></div>
+
+    <div id="sel-bar" class="sel-bar" style="display:none" onclick="irStep2()">
+      <div class="sel-bar-nome" id="sel-nome">—</div>
+      <button class="sel-bar-btn">Continuar →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: Cadastro -->
+  <div id="step2" style="display:none">
+    <div class="step-lbl"><div class="step-num">2</div>Seus dados</div>
+    <div id="resumo-bar" style="background:#f8f5f0;padding:12px 18px;display:flex;justify-content:space-between;font-size:13px;border-bottom:1px solid var(--border)">
+      <span id="res-nome" style="font-weight:600"></span>
+      <span id="res-preco" style="color:var(--gold);font-weight:700"></span>
+    </div>
+    <div class="form-body">
+      <div class="campo"><label>Nome *</label><input id="c-nome" placeholder="Seu nome" autocomplete="given-name"></div>
+      <div class="campo"><label>Sobrenome *</label><input id="c-sob" placeholder="Sobrenome" autocomplete="family-name"></div>
+      <div class="campo"><label>Data de nascimento</label><input id="c-nasc" type="date"></div>
+      <div class="aviso-box">
+        <div class="aviso-tit">📋 Combinados importantes</div>
+        <div class="aviso-item">Seu horário é <strong>validado após confirmar via WhatsApp</strong>.</div>
+        <div class="aviso-item">Tolerância máxima de <strong>15 minutos</strong> de atraso.</div>
+        <div class="aviso-item">Cancelamentos: avise com <strong>mínimo 5 horas</strong> de antecedência.</div>
+        <div class="aviso-item">No-show sem aviso: <strong>taxa de 50%</strong> no próximo agendamento.</div>
+        <div class="aviso-item">Pacotes são <strong>nominais e intransferíveis</strong>. Falta sem aviso = perda da sessão.</div>
+        <div class="aviso-item"><strong>5% de desconto</strong> no pagamento via Pix ou dinheiro.</div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-sec" style="flex:1" onclick="irStep(1)">← Voltar</button>
+        <button class="btn btn-pr" style="flex:2" onclick="irStep3()">Próximo →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: Data e horário -->
+  <div id="step3" style="display:none">
+    <div class="step-lbl"><div class="step-num">3</div>Data e horário</div>
+    <div class="form-body">
+      <div class="campo"><label>Data do atendimento *</label><input id="c-data" type="date"></div>
+      <div class="campo">
+        <label>Horário preferido *</label>
+        <div class="horas-grid" id="horas-grid"></div>
+      </div>
+      <div class="campo"><label>Observações (opcional)</label><textarea id="c-obs" placeholder="Histórico químico, alergia a produto..."></textarea></div>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-sec" style="flex:1" onclick="irStep(2)">← Voltar</button>
+        <button class="btn btn-gold" style="flex:2" onclick="confirmarAg()">Confirmar ✓</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4: Confirmação -->
+  <div id="step4" style="display:none">
+    <div class="conf-hero">
+      <div class="conf-icon">🎉</div>
+      <div class="conf-tit">Agendamento enviado!</div>
+      <div class="conf-det" id="conf-det"></div>
+    </div>
+    <div style="padding:18px">
+      <div class="end-card">📍 <strong>R. José Bonifácio, 1681 — São Carlos/SP</strong><br>Em frente ao estacionamento subterrâneo do Extra</div>
+      <a id="wpp-link" href="#" target="_blank" class="btn" style="background:#25D366;color:#fff;margin-bottom:10px">💬 Confirmar pelo WhatsApp</a>
+      <button class="btn btn-sec" onclick="resetCliente()">Fazer outro agendamento</button>
+    </div>
+  </div>
+
+  <div style="height:30px"></div>
+</div>
+
+<!-- Botão fixo de acesso admin — só você usa -->
+<button onclick="abrirAdmin()" style="position:fixed;bottom:20px;right:16px;width:44px;height:44px;border-radius:50%;background:#111;color:#fff;border:none;font-size:18px;cursor:pointer;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center" title="Acesso profissional">🔐</button>
+
+<!-- ═══════════════════════════════
+     LOGIN ADMIN
+════════════════════════════════ -->
+<div id="pg-login" class="page">
+  <div class="login-pg">
+    <div class="login-card">
+      <div class="er-logo" style="color:var(--pr);margin-bottom:14px">
+        <div class="er-initials" style="font-size:52px">ER</div>
+        <div class="er-name" style="color:var(--txt2)">Evelyn Ramos</div>
+      </div>
+      <div class="gold-line" style="margin-bottom:18px"></div>
+      <div style="font-size:13px;color:var(--txt2);margin-bottom:18px">Painel profissional</div>
+      <div class="campo">
+        <label style="font-size:11px;font-weight:600;color:var(--txt2);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px">Senha de acesso</label>
+        <input id="senha-inp" type="password" placeholder="••••" style="text-align:center;font-size:22px;letter-spacing:8px" onkeydown="if(event.key==='Enter')login()">
+      </div>
+      <div id="senha-err" style="color:var(--verm);font-size:13px;margin-bottom:8px;display:none">Senha incorreta.</div>
+      <button class="btn btn-pr" onclick="login()">Entrar</button>
+      <button class="btn btn-sec" style="margin-top:8px" onclick="irPg('pg-cliente')">← Voltar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════
+     ADMIN
+════════════════════════════════ -->
+<div id="pg-admin" class="page">
+  <div class="admin-wrap">
+    <div class="sidebar">
+      <div class="sb-logo">
+        <div class="sb-er">ER</div>
+        <div class="sb-sub">Evelyn Ramos</div>
+        <div class="sb-gold"></div>
+      </div>
+      <nav id="admin-nav"></nav>
+      <div class="sb-foot">
+        <button class="btn-sm" style="width:100%;background:rgba(255,80,80,.12);color:#ff7070;justify-content:center" onclick="irPg('pg-cliente')">← Sair do painel</button>
+      </div>
+    </div>
+    <div class="admin-main" id="admin-main"></div>
+  </div>
+</div>
+
+<!-- MODAIS -->
+<div class="modal-bg" id="m-pgto"><div class="mbox"><div class="mhdr"><div class="mtit">Registrar pagamento</div><button class="bx" onclick="fecharModal('m-pgto')">×</button></div><div id="m-pgto-body"></div></div></div>
+<div class="modal-bg" id="m-ag"><div class="mbox"><div class="mhdr"><div class="mtit" id="m-ag-tit">Novo agendamento</div><button class="bx" onclick="fecharModal('m-ag')">×</button></div><div id="m-ag-body"></div></div></div>
+<div class="modal-bg" id="m-cli"><div class="mbox"><div class="mhdr"><div class="mtit" id="m-cli-tit">Cadastrar cliente</div><button class="bx" onclick="fecharModal('m-cli')">×</button></div><div id="m-cli-body"></div></div></div>
+<div class="modal-bg" id="m-est"><div class="mbox"><div class="mhdr"><div class="mtit" id="m-est-tit">Produto</div><button class="bx" onclick="fecharModal('m-est')">×</button></div><div id="m-est-body"></div></div></div>
+<div class="modal-bg" id="m-serv"><div class="mbox"><div class="mhdr"><div class="mtit" id="m-serv-tit">Serviço</div><button class="bx" onclick="fecharModal('m-serv')">×</button></div><div id="m-serv-body"></div></div></div>
+<div class="modal-bg" id="m-conta"><div class="mbox"><div class="mhdr"><div class="mtit">Conta a pagar</div><button class="bx" onclick="fecharModal('m-conta')">×</button></div><div id="m-conta-body"></div></div></div>
+
+<script>
+// ══════════════════════════════════════
+// CONFIG
+// ══════════════════════════════════════
+const SENHA = "1234";
+const WPP_SALAO = "16993954381";
+const ENDERECO = "R. José Bonifácio, 1681 - São Carlos/SP\n(em frente ao estacionamento subterrâneo do Extra)";
+const DESCONTO_PIX = 5;
+let META = 15000;
+let TAXAS = {deb: 1.99, cred: 2.99};
+
+// ══════════════════════════════════════
+// CATÁLOGO — serviços reais sem duplicata
+// ══════════════════════════════════════
+const CATS = [
+  {
+    titulo: "Químicas & Alisamentos",
+    servicos: [
+      {id:1, nome:"Progressiva MY HORIZON — Cabelo Inteiro", preco:550, dur:"50min–6h", emoji:"🪄",
+       desc:"Alinhamento total com tecnologia Robson Peluquero. Você visualiza o resultado real ainda no salão. Inclui retoque gratuito se necessário. Incluso: secagem sem escova.", tipo:"progressiva"},
+      {id:2, nome:"Progressiva MY HORIZON — Retoque de Raiz", preco:280, dur:"50min–3h", emoji:"✨",
+       desc:"Alinhamento preciso da parte crescida, liso uniforme e natural. Ativo My Horizon aplicado apenas na região virgem. Incluso: secagem sem escova.", tipo:"progressiva"},
+      {id:3, nome:"Botox Plus", preco:290, dur:"50min–3h", emoji:"💎",
+       desc:"Blend exclusivo preparado no salão: máscaras de reconstrução profunda, óleos puros e ativos de reestruturação. Selamento térmico com prancha para fixar a reestruturação no fio."},
+      {id:4, nome:"Selagem Térmica", preco:245, dur:"50min–3h", emoji:"🔥",
+       desc:"Redução de volume e alinhamento sem efeito de liso chapado. Foco no controle do frizz e reposição de massa capilar. Finalização apenas com secador para resultado real."},
+    ]
+  },
+  {
+    titulo: "Colorações & Transformações",
+    servicos: [
+      {id:5, nome:"Transformação Loiro", preco:800, dur:"1h–6h", emoji:"👱‍♀️",
+       desc:"Mechas e iluminação com tecnologia Robson Peluquero. Teste de mecha obrigatório, preparação da fibra, clareamento, matização técnica e 30min de tratamento reconstrutora. Incluso: finalização profissional e maquiagem leve.", tipo:"loiro"},
+      {id:6, nome:"Transformação Moreno Iluminado", preco:500, dur:"1h–4h", emoji:"🌟",
+       desc:"Pontos de luz e contraste para visual sofisticado e natural. Tons personalizados linha Robson Peluquero. Incluso: finalização profissional e maquiagem leve."},
+      {id:7, nome:"Coloração", preco:150, dur:"1h–2h", emoji:"🎨",
+       desc:"Cobertura perfeita com tecnologia Dicollore, que trata o fio enquanto colore. Coloração rica em óleos nutritivos, pausa técnica e banho de brilho pós-enxágue. Incluso: finalização à escolha."},
+    ]
+  },
+  {
+    titulo: "Tratamentos & Recuperação",
+    servicos: [
+      {id:8, nome:"Tratamento CCRP — Choque de Recuperação", preco:185, dur:"50min–1h30", emoji:"💪",
+       desc:"Alta performance para cabelos elásticos, emborrachados ou sensibilizados por químicas. Sistema CCRP com selamento de pH. Essencial como pré e pós-química."},
+      {id:9, nome:"CCRP Turbo Carvão Ativado", preco:246, dur:"50min–1h30", emoji:"⚡",
+       desc:"Extração de metais pesados, cloro e resíduos químicos. Carvão ativado que remove impurezas da fibra. Essencial como pré-química (mechas ou alisamentos)."},
+      {id:10, nome:"Tratamento AVULSO", preco:130, dur:"1h–1h30", emoji:"🌿",
+       desc:"Cuidado imediato para devolver brilho, maciez e reposição hídrica em uma sessão. Máscara escolhida conforme necessidade do fio (hidratação ou nutrição). Incluso: finalização à escolha."},
+    ]
+  },
+  {
+    titulo: "Cronogramas Capilares",
+    servicos: [
+      {id:11, nome:"Cronograma Capilar Mensal — Dicollore", preco:430, dur:"1h–1h30", emoji:"📅",
+       desc:"4 visitas mensais (1× por semana). Inicia com Tratamento Antiporosidade obrigatório. Hidratação, Nutrição ou Reconstrução conforme cronograma personalizado. Incluso: finalização à escolha.", pacote:"mensal", sessoes:4},
+      {id:12, nome:"Cronograma Capilar Quinzenal — Dicollore", preco:230, dur:"1h–1h30", emoji:"📆",
+       desc:"2 visitas mensais (1× a cada 15 dias). Inicia com Tratamento Antiporosidade. Etapas conforme cronograma personalizado. Incluso: finalização à escolha.", pacote:"quinzenal", sessoes:2},
+    ]
+  },
+  {
+    titulo: "Cortes & Escova",
+    servicos: [
+      {id:13, nome:"Corte Bordado", preco:150, dur:"1h–2h30", emoji:"✂️",
+       desc:"Elimina pontas duplas sem alterar o comprimento. Realizado mecha a mecha com maquinário de alta precisão. Finaliza com máscara selante e escova para polimento."},
+      {id:14, nome:"Corte com Escova", preco:150, dur:"1h–1h30", emoji:"💇‍♀️",
+       desc:"Acabamento de salão para o dia a dia ou eventos. Shampoo profissional, protetor térmico e escovação detalhada. Incluso: finalização à escolha (Liso, Cachos, Ondas ou Triondas)."},
+    ]
+  },
+  {
+    titulo: "Assinatura & Pacotes",
+    servicos: [
+      {id:15, nome:"Assinatura de Lavatório Mensal (30 dias)", preco:250, dur:"1h–1h30", emoji:"💝",
+       desc:"Conveniência para manter os cabelos higienizados e finalizados durante todo o mês. Higienização do couro cabeludo e condicionamento profissional. Incluso: finalização à escolha."},
+    ]
+  },
+];
+
+// Flatten para uso geral no sistema
+const SERVICOS = CATS.flatMap(c => c.servicos);
+
+// ══════════════════════════════════════
+// DADOS
+// ══════════════════════════════════════
+let CLIENTES = [
+  {id:1, nome:"Ariele", sob:"Kenko", tel:"16992324731", nasc:"", equipe:false},
+  {id:2, nome:"Bruna", sob:"colaboradora", tel:"16999612172", nasc:"2002-07-25", equipe:true},
+  {id:3, nome:"Caroline", sob:"", tel:"16981936529", nasc:"", equipe:false},
+  {id:4, nome:"Georgia", sob:"", tel:"16991685054", nasc:"", equipe:false},
+  {id:5, nome:"Ju", sob:"Barreiro", tel:"16996324237", nasc:"", equipe:false},
+  {id:6, nome:"Julia", sob:"Joia", tel:"16997386679", nasc:"", equipe:false},
+  {id:7, nome:"Lete", sob:"", tel:"16981782344", nasc:"", equipe:false},
+  {id:8, nome:"Luzia", sob:"Salgados", tel:"16981193576", nasc:"", equipe:false},
+  {id:9, nome:"Marcia", sob:"Silva", tel:"11988573010", nasc:"", equipe:false},
+  {id:10, nome:"Nayara", sob:"filha da Simone", tel:"16999755287", nasc:"", equipe:false},
+  {id:11, nome:"Patricia", sob:"Tita", tel:"16993279986", nasc:"", equipe:false},
+  {id:12, nome:"Tatiane", sob:"", tel:"16994111881", nasc:"", equipe:false},
+  {id:13, nome:"Veronica", sob:"Mazak", tel:"16993319488", nasc:"", equipe:false},
+  {id:14, nome:"Eli", sob:"colaboradora", tel:"19981365045", nasc:"", equipe:true},
+  {id:15, nome:"Maria", sob:"colaboradora", tel:"16992338336", nasc:"1998-08-21", equipe:true},
+  {id:16, nome:"Lizandra", sob:"mãe da yngrid", tel:"16994020082", nasc:"", equipe:false},
+  {id:17, nome:"Thamires", sob:"filha da Lu", tel:"", nasc:"", equipe:false},
+];
+
+let ESTOQUE = [
+  {id:1, nome:"Acelerador", marca:"Robson peluquero", qtd:500, max:500, custo:140},
+  {id:2, nome:"Acidificante", marca:"Dicolore", qtd:1000, max:1000, custo:210},
+  {id:3, nome:"Argiloterapy", marca:"Dicolore", qtd:1000, max:1000, custo:450},
+  {id:4, nome:"BOOM mascara", marca:"Dicolore", qtd:970, max:1000, custo:241.5},
+  {id:5, nome:"CCRP", marca:"Robson peluquero", qtd:500, max:500, custo:529},
+  {id:6, nome:"CCRP Carvão", marca:"Robson peluquero", qtd:1000, max:1000, custo:1000},
+  {id:7, nome:"CCRP passo 1", marca:"Robson peluquero", qtd:500, max:500, custo:132.25},
+  {id:8, nome:"CCRP passo 3", marca:"Robson peluquero", qtd:500, max:500, custo:132.25},
+  {id:9, nome:"Coloração 30g", marca:"Dicolore", qtd:0, max:30, custo:26.70},
+  {id:10, nome:"Condicionador 5L", marca:"Dicolore", qtd:9970, max:10000, custo:127},
+  {id:11, nome:"Creme botox", marca:"Robson peluquero", qtd:1000, max:1000, custo:205},
+  {id:12, nome:"D restore", marca:"Dicolore", qtd:250, max:250, custo:82.5},
+  {id:13, nome:"Gelatina", marca:"Dicollore", qtd:250, max:250, custo:57},
+  {id:14, nome:"Hidrasilic Mascara", marca:"Dicolore", qtd:970, max:1000, custo:241.5},
+  {id:15, nome:"Hidrasilic Shampoo", marca:"Dicolore", qtd:970, max:1000, custo:180},
+  {id:16, nome:"K suplay", marca:"Dicolore", qtd:955, max:1000, custo:210},
+  {id:17, nome:"Marula Oil mascara", marca:"Dicollore", qtd:1000, max:1000, custo:241.5},
+  {id:18, nome:"Marula Oil shampoo", marca:"Dicolore", qtd:1000, max:1000, custo:180},
+  {id:19, nome:"Mascara Faiber", marca:"Dicolore", qtd:1000, max:1000, custo:241.5},
+  {id:20, nome:"Matizador", marca:"Robson peluquero", qtd:970, max:1000, custo:210},
+  {id:21, nome:"Mouse", marca:"Dicollore", qtd:150, max:150, custo:51.9},
+  {id:22, nome:"Oleo CCRP", marca:"Robson peluquero", qtd:300, max:300, custo:132.25},
+  {id:23, nome:"Oleo de pontas", marca:"", qtd:35, max:60, custo:93},
+  {id:24, nome:"Ox 20 Robson", marca:"Robson peluquero", qtd:900, max:900, custo:54},
+  {id:25, nome:"Ox 20 Dicolore", marca:"Dicolore", qtd:780, max:900, custo:54},
+  {id:26, nome:"Ox 30 Robson", marca:"Robson peluquero", qtd:840, max:900, custo:54},
+  {id:27, nome:"Ox 30 Dicolore", marca:"Dicolore", qtd:900, max:900, custo:54},
+  {id:28, nome:"Ox 40", marca:"Robson peluquero", qtd:900, max:900, custo:54},
+  {id:29, nome:"Perfume", marca:"Robson peluquero", qtd:35, max:60, custo:129},
+  {id:30, nome:"Ph Estabilize", marca:"Dicolore", qtd:955, max:1000, custo:138.6},
+  {id:31, nome:"Pó descolorante", marca:"Robson peluquero", qtd:0, max:50, custo:149},
+  {id:32, nome:"Progressiva My Horizon", marca:"Robson peluquero", qtd:750, max:1000, custo:499},
+  {id:33, nome:"Protetor térmico", marca:"Robson peluquero", qtd:265, max:300, custo:70},
+  {id:34, nome:"Shampoo 5L", marca:"Dicolore", qtd:775, max:1000, custo:127},
+  {id:35, nome:"Shampoo botox", marca:"Robson peluquero", qtd:1000, max:1000, custo:205},
+  {id:36, nome:"Shampoo Faiber", marca:"Dicollore", qtd:1000, max:1000, custo:207},
+  {id:37, nome:"Ultra repair", marca:"Dicolore", qtd:985, max:1000, custo:180},
+  {id:38, nome:"Ultra repair mascara", marca:"Dicolore", qtd:970, max:1000, custo:241.5},
+];
+
+let AGS = [
+  {id:1, cliId:7, serv:"Progressiva MY HORIZON — Cabelo Inteiro", preco:550, data:hoje(), hora:"09:00", status:"agendado", pgto:null, troca:false, obs:"", inicio:null, fim:null, metodo:"", valorFinal:0},
+  {id:2, cliId:8, serv:"Cronograma Capilar Mensal — Dicollore", preco:430, data:hoje(), hora:"14:00", status:"agendado", pgto:null, troca:false, obs:"", inicio:null, fim:null, metodo:"", valorFinal:0},
+];
+
+let CONTAS = [
+  {id:1, desc:"Aluguel do salão", valor:2000, venc:"2026-05-05", cat:"Fixo", pago:false},
+  {id:2, desc:"Conta de luz", valor:350, venc:"2026-04-25", cat:"Fixo", pago:false},
+  {id:3, desc:"Reposição Pó descolorante", valor:149, venc:"2026-04-22", cat:"Produto", pago:false},
+];
+
+// ══════════════════════════════════════
+// UTILS
+// ══════════════════════════════════════
+function gId(){return Date.now()+Math.random();}
+function hoje(){return new Date().toISOString().slice(0,10);}
+function agr(){const d=new Date();return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");}
+function fmtD(s){if(!s)return"";const[a,m,d]=s.split("-");return d+"/"+m+"/"+a;}
+function fmtR(v){return Number(v||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});}
+function ini(n){return(n||"?").split(" ").map(x=>x[0]).slice(0,2).join("").toUpperCase();}
+function wLink(tel,msg){return"https://wa.me/55"+tel.replace(/\D/g,"")+"?text="+encodeURIComponent(msg);}
+function aWpp(tel,msg){if(!tel)return alert("Sem telefone!");window.open(wLink(tel,msg),"_blank");}
+function getCl(id){return CLIENTES.find(c=>c.id==id)||{};}
+function nC(id){const c=getCl(id);return(c.nome||"")+" "+(c.sob||"").trim()||"—";}
+function bdg(tipo){
+  const m={agendado:"b-ag",emAtendimento:"b-atend",concluido:"b-conc",cancelado:"b-canc",pendente:"b-pend",pago:"b-pago",fiado:"b-fiado",troca:"b-troca"};
+  return`<span class="badge ${m[tipo]||"b-pend"}">${tipo}</span>`;
+}
+function avInit(id){const c=getCl(id);return ini((c.nome||"")+" "+(c.sob||""));}
+
+// ══════════════════════════════════════
+// NAVEGAÇÃO
+// ══════════════════════════════════════
+function irPg(id){document.querySelectorAll(".page").forEach(p=>p.classList.remove("ativa"));document.getElementById(id).classList.add("ativa");window.scrollTo(0,0);}
+function abrirAdmin(){irPg("pg-login");setTimeout(()=>document.getElementById("senha-inp").focus(),150);}
+function login(){
+  if(document.getElementById("senha-inp").value===SENHA){
+    document.getElementById("senha-inp").value="";
+    irPg("pg-admin");
+    renderAdmin("dashboard");
+  } else {
+    document.getElementById("senha-err").style.display="block";
+  }
+}
+function fecharModal(id){document.getElementById(id).classList.remove("aberto");}
+function abrirModal(id){document.getElementById(id).classList.add("aberto");}
+
+// ══════════════════════════════════════
+// CATÁLOGO CLIENTE
+// ══════════════════════════════════════
+let CLI_SERV = null;
+const HORAS = ["08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30","12:00","13:00","14:00","15:00","16:00","17:00","18:00"];
+let CLI_HORA = "09:00";
+
+function renderCatalogo(){
+  document.getElementById("catalogo").innerHTML = CATS.map(cat=>`
+    <div class="cat-tit">${cat.titulo}</div>
+    ${cat.servicos.map(s=>`
+      <div class="scard" id="sc${s.id}" onclick="selecionarServ(${s.id})">
+        <div class="scard-body">
+          <div class="scard-nome">${s.emoji} ${s.nome}</div>
+          <div class="scard-desc">${s.desc}</div>
+          <div class="scard-foot">
+            <div class="scard-preco">${s.preco>0?fmtR(s.preco):"Incluso no pacote"}</div>
+            <div class="scard-tags">
+              <span class="tag">${s.dur}</span>
+              ${s.pacote?`<span class="tag tag-gold">📅 ${s.sessoes} sessões</span>`:""}
+              ${s.preco>0?`<span class="tag" style="background:var(--verdeC);color:var(--verde)">5% Pix</span>`:""}
+            </div>
+          </div>
+        </div>
+        <div class="sel-check">✓</div>
+      </div>`).join("")}`).join("");
+}
+
+function selecionarServ(id){
+  CLI_SERV = SERVICOS.find(s=>s.id===id);
+  document.querySelectorAll(".scard").forEach(c=>c.classList.remove("sel"));
+  document.getElementById("sc"+id)?.classList.add("sel");
+  const bar = document.getElementById("sel-bar");
+  bar.style.display = "flex";
+  document.getElementById("sel-nome").textContent = CLI_SERV.nome;
+}
+
+function irStep2(){
+  if(!CLI_SERV) return;
+  document.getElementById("res-nome").textContent = CLI_SERV.nome;
+  document.getElementById("res-preco").textContent = CLI_SERV.preco>0 ? fmtR(CLI_SERV.preco) : "Incluso";
+  irStep(2);
+}
+
+function irStep3(){
+  if(!document.getElementById("c-nome").value.trim()) return alert("Informe seu nome!");
+  if(!document.getElementById("c-sob").value.trim()) return alert("Informe seu sobrenome!");
+  const minData = hoje();
+  const inp = document.getElementById("c-data");
+  inp.min = minData;
+  if(!inp.value || inp.value < minData) inp.value = minData;
+  renderHoras();
+  irStep(3);
+}
+
+function renderHoras(){
+  document.getElementById("horas-grid").innerHTML = HORAS.map(h=>
+    `<button class="h-btn${CLI_HORA===h?" sel":""}" onclick="selH('${h}',this)">${h}</button>`
+  ).join("");
+}
+function selH(h,el){CLI_HORA=h;document.querySelectorAll(".h-btn").forEach(b=>b.classList.remove("sel"));el.classList.add("sel");}
+
+function irStep(n){
+  [1,2,3,4].forEach(i=>{
+    const el=document.getElementById("step"+i); if(el) el.style.display="none";
+    const s=document.getElementById("s"+i); if(s) s.classList.remove("on");
+  });
+  const tgt=document.getElementById("step"+n); if(tgt) tgt.style.display="block";
+  for(let i=1;i<=n;i++){const s=document.getElementById("s"+i);if(s)s.classList.add("on");}
+  window.scrollTo(0,0);
+  // Esconder barra de seleção no step 2+
+  if(n>1) document.getElementById("sel-bar").style.display="none";
+}
+
+// URL do Google Apps Script — cole aqui após configurar
+const SHEETS_URL = "https://hook.us2.make.com/d4eietxxi64w7n5vikjcnjmczg2svjx4";
+
+function enviarParaSheets(dados){
+  if(!SHEETS_URL || SHEETS_URL === "COLE_AQUI_A_URL_DO_SEU_SCRIPT") return;
+  fetch(SHEETS_URL, {
+    method:"POST", mode:"no-cors",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify(dados)
+  }).catch(e=>console.log("Sheets:",e));
+}
+
+function confirmarAg(){
+  const data = document.getElementById("c-data").value;
+  if(!data) return alert("Selecione a data!");
+  const nome = document.getElementById("c-nome").value.trim();
+  const sob = document.getElementById("c-sob").value.trim();
+  const nasc = document.getElementById("c-nasc").value;
+  const obs = document.getElementById("c-obs").value.trim();
+
+  // Buscar ou criar cliente
+  let cl = CLIENTES.find(c=>c.nome.toLowerCase()===nome.toLowerCase()&&c.sob.toLowerCase()===sob.toLowerCase());
+  if(!cl){cl={id:gId(),nome,sob,tel:"",nasc,equipe:false};CLIENTES.push(cl);}
+
+  // Criar agendamento localmente
+  AGS.push({id:gId(),cliId:cl.id,serv:CLI_SERV.nome,preco:CLI_SERV.preco,data,hora:CLI_HORA,status:"agendado",pgto:null,troca:false,obs,inicio:null,fim:null,metodo:"",valorFinal:0});
+
+  // Enviar para Google Sheets
+  enviarParaSheets({acao:"novoAgendamento",nome,sobrenome:sob,nascimento:nasc,servico:CLI_SERV.nome,preco:CLI_SERV.preco,data,hora:CLI_HORA,obs,timestamp:new Date().toISOString()});
+
+  // Montar confirmação
+  document.getElementById("conf-det").innerHTML = `
+    <div class="conf-det-row"><div class="conf-det-label">Cliente</div><div class="conf-det-val">${nome} ${sob}</div></div>
+    <div class="conf-det-row"><div class="conf-det-label">Serviço</div><div class="conf-det-val">${CLI_SERV.nome}</div></div>
+    <div class="conf-det-row"><div class="conf-det-label">Data e horário</div><div class="conf-det-val">${fmtD(data)} às ${CLI_HORA}</div></div>
+    ${CLI_SERV.preco>0?`<div class="conf-det-row"><div class="conf-det-label">Valor</div><div class="conf-det-val">${fmtR(CLI_SERV.preco)} <span style="opacity:.6;font-size:11px">(5% desc. Pix/Dinheiro)</span></div></div>`:"<div class=\"conf-det-row\"><div class=\"conf-det-label\">Valor</div><div class=\"conf-det-val\">Incluso no pacote</div></div>"}`;
+
+  const msg = `Olá, Evelyn! 😊\n\nAcabei de fazer meu agendamento pelo site:\n\n✂️ *${CLI_SERV.nome}*\n📅 ${fmtD(data)} às ${CLI_HORA}${CLI_SERV.preco>0?"\n💰 "+fmtR(CLI_SERV.preco)+" (5% desc. Pix/Dinheiro)":""}\n\nNome: ${nome} ${sob}${obs?"\nObs: "+obs:""}`;
+  document.getElementById("wpp-link").href = wLink(WPP_SALAO, msg);
+  irStep(4);
+}
+
+function resetCliente(){
+  CLI_SERV=null; CLI_HORA="09:00";
+  ["c-nome","c-sob","c-nasc","c-obs","c-data"].forEach(id=>{const el=document.getElementById(id);if(el)el.value="";});
+  document.querySelectorAll(".scard").forEach(c=>c.classList.remove("sel"));
+  document.getElementById("sel-bar").style.display="none";
+  renderCatalogo();
+  irStep(1);
+}
+
+// ══════════════════════════════════════
+// ADMIN — MENU
+// ══════════════════════════════════════
+const MENUS = [
+  {id:"dashboard",l:"Dashboard"},
+  {id:"agenda",l:"Agenda"},
+  {id:"agendamentos",l:"Agendamentos"},
+  {id:"clientes",l:"Clientes"},
+  {id:"servicos",l:"Serviços"},
+  {id:"estoque",l:"Estoque"},
+  {id:"financeiro",l:"Financeiro"},
+  {id:"mensagens",l:"Mensagens"},
+  {id:"metas",l:"Metas"},
+  {id:"whatsapp",l:"WhatsApp/Meta"},
+  {id:"config",l:"Configurações"},
+];
+let TA="dashboard";
+let agF="todos", clB="", estB="", finA="entradas", msgA="sumidas";
+
+function renderAdmin(tela){
+  TA=tela;
+  const aE=ESTOQUE.filter(p=>p.qtd===0||p.qtd/p.max<0.15).length;
+  const fQ=AGS.filter(a=>a.pgto==="fiado").length;
+  const cV=CONTAS.filter(c=>!c.pago&&c.venc<=hoje()).length;
+  const mH=new Date().getMonth()+1;
+  const aQ=CLIENTES.filter(c=>c.nasc&&parseInt(c.nasc.split("-")[1])===mH&&!c.equipe).length;
+  document.getElementById("admin-nav").innerHTML=MENUS.map(m=>{
+    let l=m.l;
+    if(m.id==="estoque"&&aE) l+=" ⚠️";
+    if(m.id==="financeiro"&&(fQ||cV)) l+=" 🔔";
+    if(m.id==="mensagens"&&aQ) l+=" 🎂";
+    return`<button class="nav-btn${TA===m.id?" ativo":""}" onclick="renderAdmin('${m.id}')">${l}</button>`;
+  }).join("");
+  const fns={dashboard:pgDash,agenda:pgAgenda,agendamentos:pgAgs,clientes:pgClis,servicos:pgServicos,estoque:pgEst,financeiro:pgFin,mensagens:pgMsg,metas:pgMetas,whatsapp:pgWpp,config:pgConfig};
+  document.getElementById("admin-main").innerHTML=(fns[tela]||pgDash)();
+  window.scrollTo(0,0);
+}
+
+// ══════════════════════════════════════
+// DASHBOARD
+// ══════════════════════════════════════
+function pgDash(){
+  const hj=AGS.filter(a=>a.data===hoje());
+  const rec=AGS.filter(a=>a.pgto==="pago"&&!a.troca).reduce((s,a)=>s+Number(a.valorFinal||a.preco),0);
+  const fiad=AGS.filter(a=>a.pgto==="fiado").reduce((s,a)=>s+Number(a.preco),0);
+  const pct=Math.min(100,Math.round((rec/META)*100));
+  const alEst=ESTOQUE.filter(p=>p.qtd===0||p.qtd/p.max<0.1);
+  const ctV=CONTAS.filter(c=>!c.pago&&c.venc<=hoje());
+  const mH=new Date().getMonth()+1;
+  const anv=CLIENTES.filter(c=>c.nasc&&parseInt(c.nasc.split("-")[1])===mH&&!c.equipe);
+  const prox=AGS.filter(a=>a.data>=hoje()&&a.status!=="cancelado").sort((a,b)=>(a.data+a.hora).localeCompare(b.data+b.hora)).slice(0,6);
+  return`
+<div class="pg-hdr"><div><div class="pg-tit">Dashboard</div><div class="pg-sub">${new Date().toLocaleDateString("pt-BR",{weekday:"long",day:"numeric",month:"long"})}</div></div></div>
+<div class="metrics">
+  <div class="metric"><div class="m-l">Hoje</div><div class="m-v">${hj.length}</div></div>
+  <div class="metric"><div class="m-l">Recebido</div><div class="m-v" style="color:var(--verde)">${fmtR(rec)}</div></div>
+  <div class="metric"><div class="m-l">Fiado</div><div class="m-v" style="color:var(--roxo)">${fmtR(fiad)}</div></div>
+  <div class="metric"><div class="m-l">Meta</div><div class="m-v">${pct}%</div></div>
+</div>
+<div class="acard" style="padding:14px 18px;margin-bottom:12px">
+  <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:7px"><span>Meta mensal — ${fmtR(META)}</span><span style="color:${pct>=100?"var(--verde)":"var(--pr)"}">${pct}%</span></div>
+  <div class="pmeta"><div class="pfill" style="width:${pct}%"></div></div>
+  <div style="font-size:11px;color:var(--txt2);margin-top:5px">Falta receber: ${fmtR(Math.max(0,META-rec))}</div>
+</div>
+${ctV.length?`<div class="alrt alrt-v">⚠️ ${ctV.length} conta(s) vencida(s): ${ctV.map(c=>c.desc).join(", ")}</div>`:""}
+${alEst.length?`<div class="alrt alrt-a">📦 Estoque crítico: ${alEst.slice(0,3).map(p=>p.nome).join(", ")}</div>`:""}
+${anv.length?`<div class="alrt alrt-g">🎂 Aniversariante(s) este mês: ${anv.map(c=>c.nome).join(", ")}</div>`:""}
+<div class="g2">
+  <div class="acard"><div class="acard-tit">Próximos agendamentos</div>
+    ${prox.length?prox.map(a=>`<div class="row"><div class="r-main"><div class="r-nome">${nC(a.cliId)}</div><div class="r-sub">${fmtD(a.data)} ${a.hora} · ${a.serv}</div></div>${bdg(a.troca?"troca":a.status)}</div>`).join(""):`<div style="color:var(--txt3);font-size:13px">Nenhum agendamento.</div>`}
+  </div>
+  <div class="acard"><div class="acard-tit">Estoque crítico</div>
+    ${alEst.length?alEst.slice(0,6).map(p=>`<div class="row"><div class="r-main"><div class="r-nome">${p.nome}</div><div class="r-sub">${p.marca}</div></div><span class="badge b-al">${p.qtd}/${p.max}</span></div>`).join(""):`<div style="color:var(--txt3);font-size:13px">Tudo ok! ✓</div>`}
+  </div>
+</div>`;
+}
+
+// ══════════════════════════════════════
+// AGENDA
+// ══════════════════════════════════════
+function pgAgenda(){
+  const dA=window._agD||hoje(); window._agD=dA;
+  const dodia=AGS.filter(a=>a.data===dA).sort((a,b)=>a.hora.localeCompare(b.hora));
+  return`
+<div class="pg-hdr"><div><div class="pg-tit">Agenda</div><div class="pg-sub">${dodia.length} atendimento(s)</div></div>
+<input type="date" value="${dA}" onchange="window._agD=this.value;renderAdmin('agenda')" class="isml" style="max-width:180px"></div>
+<div class="acard" style="padding:0;overflow:hidden">
+${HORAS.map(h=>{
+  const ag=dodia.find(a=>a.hora===h);
+  const c=ag?getCl(ag.cliId):{};
+  const isP=ag&&ag.serv&&(ag.serv.toLowerCase().includes("progressiva")||ag.serv.toLowerCase().includes("horizon"));
+  const isL=ag&&ag.serv&&ag.serv.toLowerCase().includes("loiro");
+  return`<div class="hlinha" style="padding:10px 16px;${ag&&ag.status==="emAtendimento"?"background:#FAF0FF":""}">
+    <div class="hl">${h}</div>
+    ${ag?`<div class="av">${avInit(ag.cliId)}</div>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:600">${nC(ag.cliId)}</div>
+        <div style="font-size:11px;color:var(--txt2)">${ag.serv} ${ag.preco>0?"· "+fmtR(ag.preco):"· incluso"}</div>
+        ${ag.inicio?`<div style="font-size:10px;color:var(--roxo)">⏱ ${ag.inicio}${ag.fim?" → "+ag.fim:" (andamento)"}</div>`:""}
+      </div>
+      ${bdg(ag.troca?"troca":ag.status)}
+      ${!ag.troca&&ag.preco>0?bdg(ag.pgto||"pendente"):""}
+      <div style="display:flex;gap:5px;flex-wrap:wrap">
+        ${c.tel?`<button class="btn-sm" style="background:#25D366;color:#fff" onclick="aWpp('${c.tel}',msgConf(AGS.find(a=>a.id==${ag.id})))">WPP</button>`:""}
+        ${isP&&c.tel?`<button class="btn-sm" style="background:#7B1FA2;color:#fff" onclick="aWpp('${c.tel}',msgPosP(getCl(${ag.cliId})))">Pós-prog</button>`:""}
+        ${isL&&c.tel?`<button class="btn-sm" style="background:#E65100;color:#fff" onclick="aWpp('${c.tel}',msgPosL(getCl(${ag.cliId})))">Pós-loiro</button>`:""}
+        ${ag.status==="agendado"?`<button class="btn-sm" style="background:var(--roxoC);color:var(--roxo)" onclick="iniciarAtend(${ag.id})">▶ Iniciar</button>`:""}
+        ${ag.status==="emAtendimento"?`<button class="btn-sm" style="background:var(--verdeC);color:var(--verde)" onclick="finalizarAtend(${ag.id})">⏹ Finalizar</button>`:""}
+        ${!ag.troca&&ag.preco>0&&ag.pgto!=="pago"?`<button class="btn-sm" style="background:var(--verdeC);color:var(--verde);font-weight:700" onclick="abrirPgto(${ag.id})">💰 Pagar</button>`:""}
+        ${ag.status!=="cancelado"&&ag.status!=="emAtendimento"?`<button class="btn-sm" style="background:var(--vermC);color:var(--verm)" onclick="cancelarAg(${ag.id})">Cancelar</button>`:""}
+        <button class="btn-sm" style="background:var(--vermC);color:var(--verm)" onclick="excluirAg(${ag.id})">✕</button>
+      </div>`:`<div style="font-size:12px;color:#ddd;padding-top:3px">Horário livre</div>`}
+  </div>`;
+}).join("")}
+</div>`;
+}
+
+// ══════════════════════════════════════
+// AGENDAMENTOS
+// ══════════════════════════════════════
+function pgAgs(){
+  const lista=AGS.filter(a=>agF==="todos"?true:agF==="troca"?a.troca:a.status===agF).sort((a,b)=>(a.data+a.hora).localeCompare(b.data+b.hora));
+  return`
+<div class="pg-hdr"><div><div class="pg-tit">Agendamentos</div><div class="pg-sub">${AGS.length} total</div></div><button class="btn-sm btn-pr" onclick="abrirModalAg(null)">+ Novo</button></div>
+<div class="filtros">${["todos","agendado","emAtendimento","concluido","cancelado","troca"].map(f=>`<button class="fbtn${agF===f?" on":""}" onclick="agF='${f}';renderAdmin('agendamentos')">${f==="todos"?"Todos":f==="emAtendimento"?"Em atend.":f==="troca"?"Trocas":f.charAt(0).toUpperCase()+f.slice(1)}</button>`).join("")}</div>
+<div class="acard" style="padding:0">
+${lista.length?lista.map(a=>{
+  const c=getCl(a.cliId);
+  const isP=a.serv&&(a.serv.toLowerCase().includes("progressiva")||a.serv.toLowerCase().includes("horizon"));
+  const isL=a.serv&&a.serv.toLowerCase().includes("loiro");
+  return`<div class="row" style="padding:11px 16px;${a.status==="emAtendimento"?"background:#FAF0FF":""}">
+    <div class="av" style="${a.troca?"background:#0D47A1":""}">${avInit(a.cliId)}</div>
+    <div class="r-main"><div class="r-nome">${nC(a.cliId)}</div><div class="r-sub">${fmtD(a.data)} ${a.hora} · ${a.serv} ${a.preco>0?"· "+fmtR(a.preco):"· incluso"}</div>${a.inicio?`<div style="font-size:10px;color:var(--roxo)">⏱ ${a.inicio}${a.fim?" → "+a.fim:" (andamento)"}</div>`:""}</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap">${bdg(a.troca?"troca":a.status)}${!a.troca&&a.preco>0?bdg(a.pgto||"pendente"):""}</div>
+    <div style="display:flex;gap:5px;flex-wrap:wrap">
+      ${c.tel?`<button class="btn-sm" style="background:#25D366;color:#fff" onclick="aWpp('${c.tel}',msgConf(AGS.find(x=>x.id==${a.id})))">WPP</button>`:""}
+      ${isP&&c.tel?`<button class="btn-sm" style="background:#7B1FA2;color:#fff" onclick="aWpp('${c.tel}',msgPosP(getCl(${a.cliId})))">Pós-prog</button>`:""}
+      ${isL&&c.tel?`<button class="btn-sm" style="background:#E65100;color:#fff" onclick="aWpp('${c.tel}',msgPosL(getCl(${a.cliId})))">Pós-loiro</button>`:""}
+      ${a.status==="agendado"?`<button class="btn-sm" style="background:var(--roxoC);color:var(--roxo)" onclick="iniciarAtend(${a.id})">▶ Iniciar</button>`:""}
+      ${a.status==="emAtendimento"?`<button class="btn-sm" style="background:var(--verdeC);color:var(--verde)" onclick="finalizarAtend(${a.id})">⏹ Finalizar</button>`:""}
+      ${!a.troca&&a.preco>0&&a.pgto!=="pago"?`<button class="btn-sm" style="background:var(--verdeC);color:var(--verde);font-weight:700" onclick="abrirPgto(${a.id})">💰 Pagar</button>`:""}
+      <button class="btn-sm" style="background:#f0ece6" onclick="abrirModalAg(${a.id})">Editar</button>
+      <button class="btn-sm" style="background:var(--vermC);color:var(--verm)" onclick="excluirAg(${a.id})">✕</button>
+    </div>
+  </div>`;
+}).join(""):`<div style="padding:24px;text-align:center;color:var(--txt3)">Nenhum agendamento.</div>`}
+</div>`;
+}
+
+function abrirModalAg(id){
+  const a=id?AGS.find(x=>x.id===id):null;
+  document.getElementById("m-ag-tit").textContent=a?"Editar agendamento":"Novo agendamento";
+  document.getElementById("m-ag-body").innerHTML=`
+    <div class="ca"><label>Cliente</label><select class="isml" id="mag-cli"><option value="">Selecione...</option>${CLIENTES.map(c=>`<option value="${c.id}"${a&&a.cliId==c.id?" selected":""}>${c.nome} ${c.sob}${c.equipe?" (equipe)":""}</option>`).join("")}</select></div>
+    <div class="g2">
+      <div class="ca"><label>Serviço</label><select class="isml" id="mag-serv" onchange="document.getElementById('mag-preco').value=SERVICOS.find(s=>s.nome===this.value)?.preco||0">${SERVICOS.map(s=>`<option${a&&a.serv===s.nome?" selected":""}>${s.nome}</option>`).join("")}</select></div>
+      <div class="ca"><label>Valor R$</label><input class="isml" id="mag-preco" type="number" value="${a?a.preco:SERVICOS[0]?.preco||0}"></div>
+      <div class="ca"><label>Data</label><input class="isml" id="mag-data" type="date" value="${a?a.data:hoje()}"></div>
+      <div class="ca"><label>Horário</label><select class="isml" id="mag-hora">${HORAS.map(h=>`<option${a&&a.hora===h?" selected":""}>${h}</option>`).join("")}</select></div>
+    </div>
+    <div class="ca"><label>Observações</label><textarea class="isml" id="mag-obs">${a?a.obs||"":""}</textarea></div>
+    <label style="display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:14px;cursor:pointer"><input type="checkbox" id="mag-troca" ${a&&a.troca?"checked":""}> Troca equipe (não entra no financeiro)</label>
+    <button class="btn btn-pr" onclick="salvarAg(${id||0})">${a?"Salvar":"Confirmar agendamento"}</button>`;
+  abrirModal("m-ag");
+}
+function salvarAg(id){
+  const cliId=Number(document.getElementById("mag-cli").value);
+  if(!cliId) return alert("Selecione a cliente!");
+  const d={cliId,serv:document.getElementById("mag-serv").value,preco:Number(document.getElementById("mag-preco").value),data:document.getElementById("mag-data").value,hora:document.getElementById("mag-hora").value,obs:document.getElementById("mag-obs").value,troca:document.getElementById("mag-troca").checked};
+  if(id){const i=AGS.findIndex(a=>a.id===id);if(i>=0)Object.assign(AGS[i],d);}
+  else AGS.push({id:gId(),...d,status:"agendado",pgto:null,inicio:null,fim:null,metodo:"",valorFinal:0});
+  fecharModal("m-ag"); renderAdmin("agendamentos");
+}
+function iniciarAtend(id){const a=AGS.find(x=>x.id===id);if(a){a.status="emAtendimento";a.inicio=agr();}renderAdmin(TA);}
+function finalizarAtend(id){const a=AGS.find(x=>x.id===id);if(a)a.fim=agr();renderAdmin(TA);}
+function cancelarAg(id){if(confirm("Cancelar este agendamento?")){const a=AGS.find(x=>x.id===id);if(a)a.status="cancelado";}renderAdmin(TA);}
+function excluirAg(id){if(confirm("Excluir este agendamento?")){AGS=AGS.filter(a=>a.id!==id);}renderAdmin(TA);}
+
+// ══════════════════════════════════════
+// PAGAMENTO
+// ══════════════════════════════════════
+let _pgAg=null,_pgMet="pix",_pgDEx=0;
+function calcPgto(){
+  const b=Number(_pgAg?.preco)||0;
+  let desc=0,taxa=0;
+  if(_pgMet==="pix"||_pgMet==="dinheiro") desc=DESCONTO_PIX;
+  if(_pgMet==="debito") taxa=TAXAS.deb;
+  if(_pgMet==="credito") taxa=TAXAS.cred;
+  desc+=Number(_pgDEx)||0;
+  const final=Math.round(b*(1-desc/100)*(1+taxa/100)*100)/100;
+  return{b,desc,taxa,final};
+}
+function abrirPgto(id){_pgAg=AGS.find(a=>a.id===id);_pgMet="pix";_pgDEx=0;renderPgto();abrirModal("m-pgto");}
+function renderPgto(){
+  const c=getCl(_pgAg?.cliId),r=calcPgto();
+  document.getElementById("m-pgto-body").innerHTML=`
+    <div style="background:#f8f5f0;border-radius:12px;padding:13px;margin-bottom:14px">
+      <div style="font-size:12px;color:var(--txt2)">Cliente</div>
+      <div style="font-size:15px;font-weight:700;font-family:'Playfair Display',serif">${c.nome||""} ${c.sob||""}</div>
+      <div style="font-size:12px;color:var(--txt2);margin-top:2px">${_pgAg?.serv}</div>
+      <div style="font-size:21px;font-weight:700;margin-top:5px;font-family:'Playfair Display',serif">${fmtR(r.b)}</div>
+    </div>
+    <div class="ca"><label>Forma de pagamento</label>
+      <div class="pgrid">${[["pix","Pix (−5%)"],["dinheiro","Dinheiro (−5%)"],["debito","Débito (+"+TAXAS.deb+"%)"],["credito","Crédito (+"+TAXAS.cred+"%)"]]
+        .map(([v,l])=>`<div class="pop${_pgMet===v?" on":""}" onclick="_pgMet='${v}';renderPgto()">${l}</div>`).join("")}
+      </div>
+    </div>
+    <div class="ca"><label>Desconto adicional (%)</label><input class="isml" type="number" min="0" max="100" value="${_pgDEx}" oninput="_pgDEx=this.value;renderPgto()" style="max-width:130px"></div>
+    <div style="background:#f0fff4;border-radius:12px;padding:13px;margin:10px 0">
+      <div class="prow"><span>Valor base</span><span>${fmtR(r.b)}</span></div>
+      ${r.desc>0?`<div class="prow" style="color:var(--verde)"><span>Desconto (${r.desc}%)</span><span>− ${fmtR(r.b*r.desc/100)}</span></div>`:""}
+      ${r.taxa>0?`<div class="prow" style="color:var(--ambar)"><span>Taxa (${r.taxa}%)</span><span>+ ${fmtR(r.b*(1-r.desc/100)*r.taxa/100)}</span></div>`:""}
+      <div class="ptot"><span>Total</span><span>${fmtR(r.final)}</span></div>
+    </div>
+    <button class="btn btn-g" onclick="confirmarPgto('pago')">✓ Confirmar ${fmtR(r.final)}</button>
+    <button class="btn" style="background:var(--roxoC);color:var(--roxo);margin-top:8px" onclick="confirmarPgto('fiado')">Registrar como fiado</button>`;
+}
+function confirmarPgto(tipo){
+  const r=calcPgto();
+  Object.assign(_pgAg,{pgto:tipo,metodo:_pgMet,valorFinal:tipo==="fiado"?_pgAg.preco:r.final,status:_pgAg.status==="emAtendimento"?"concluido":_pgAg.status});
+  fecharModal("m-pgto"); renderAdmin(TA);
+}
+
+// ══════════════════════════════════════
+// CLIENTES
+// ══════════════════════════════════════
+function pgClis(){
+  const lista=CLIENTES.filter(c=>`${c.nome} ${c.sob}`.toLowerCase().includes(clB.toLowerCase()));
+  const mH=new Date().getMonth()+1;
+  return`
+<div class="pg-hdr"><div><div class="pg-tit">Clientes</div><div class="pg-sub">${CLIENTES.length} cadastradas</div></div><button class="btn-sm btn-pr" onclick="abrirModalCli(null)">+ Cadastrar</button></div>
+<input class="isml" placeholder="Buscar cliente..." value="${clB}" oninput="clB=this.value;renderAdmin('clientes')" style="margin-bottom:12px">
+<div class="acard" style="padding:0">
+${lista.map(c=>{
+  const ags=AGS.filter(a=>a.cliId===c.id);
+  const gasto=ags.filter(a=>a.pgto==="pago"&&!a.troca).reduce((s,a)=>s+Number(a.valorFinal||a.preco),0);
+  const aniv=c.nasc&&parseInt(c.nasc.split("-")[1])===mH;
+  return`<div class="row" style="padding:11px 16px">
+    <div class="av" style="${c.equipe?"background:#0D47A1":""}">${ini(c.nome+" "+c.sob)}</div>
+    <div class="r-main"><div class="r-nome">${c.nome} ${c.sob} ${c.equipe?bdg("troca"):""}${aniv?`<span class="badge" style="background:var(--goldC);color:#7a5c00">🎂</span>`:""}</div><div class="r-sub">${c.tel||"sem telefone"}${c.nasc?" · "+fmtD(c.nasc):""} · ${ags.length} visita(s) · ${fmtR(gasto)}</div></div>
+    <div style="display:flex;gap:5px;flex-wrap:wrap">
+      ${aniv&&c.tel?`<button class="btn-sm" style="background:var(--goldC);color:#7a5c00" onclick="aWpp('${c.tel}',msgAniv(getCl(${c.id})))">🎂</button>`:""}
+      ${c.tel?`<button class="btn-sm" style="background:#25D366;color:#fff" onclick="window.open('https://wa.me/55${c.tel.replace(/\D/g,"")}','_blank')">WPP</button>`:""}
+      <button class="btn-sm" style="background:#f0ece6" onclick="abrirModalCli(${c.id})">Editar</button>
+      <button class="btn-sm" style="background:var(--vermC);color:var(--verm)" onclick="excluirCli(${c.id})">✕</button>
+    </div>
+  </div>`;
+}).join("")||`<div style="padding:18px;text-align:center;color:var(--txt3)">Nenhum resultado.</div>`}
+</div>`;
+}
+function abrirModalCli(id){
+  const c=id?CLIENTES.find(x=>x.id===id):null;
+  document.getElementById("m-cli-tit").textContent=c?"Editar cliente":"Cadastrar cliente";
+  document.getElementById("m-cli-body").innerHTML=`
+    <div class="g2">
+      <div class="ca"><label>Nome *</label><input class="isml" id="mc-n" value="${c?.nome||""}" placeholder="Nome"></div>
+      <div class="ca"><label>Sobrenome</label><input class="isml" id="mc-s" value="${c?.sob||""}" placeholder="Sobrenome"></div>
+      <div class="ca"><label>WhatsApp</label><input class="isml" id="mc-t" value="${c?.tel||""}" placeholder="16999999999"></div>
+      <div class="ca"><label>Nascimento</label><input class="isml" id="mc-na" type="date" value="${c?.nasc||""}"></div>
+    </div>
+    <label style="display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:14px;cursor:pointer"><input type="checkbox" id="mc-eq" ${c?.equipe?"checked":""}> Membro da equipe</label>
+    <button class="btn btn-pr" onclick="salvarCli(${id||0})">${c?"Salvar":"Cadastrar"}</button>`;
+  abrirModal("m-cli");
+}
+function salvarCli(id){
+  const nome=document.getElementById("mc-n").value.trim();
+  if(!nome) return alert("Informe o nome!");
+  const d={nome,sob:document.getElementById("mc-s").value.trim(),tel:document.getElementById("mc-t").value.replace(/\D/g,""),nasc:document.getElementById("mc-na").value,equipe:document.getElementById("mc-eq").checked};
+  if(id){const i=CLIENTES.findIndex(c=>c.id===id);if(i>=0)Object.assign(CLIENTES[i],d);}
+  else CLIENTES.push({id:gId(),...d});
+  fecharModal("m-cli"); renderAdmin("clientes");
+}
+function excluirCli(id){if(confirm("Excluir esta cliente?")){CLIENTES=CLIENTES.filter(c=>c.id!==id);renderAdmin("clientes");}}
+
+// ══════════════════════════════════════
+// SERVIÇOS
+// ══════════════════════════════════════
+function pgServicos(){
+  return`
+<div class="pg-hdr"><div><div class="pg-tit">Serviços</div><div class="pg-sub">${SERVICOS.length} serviços</div></div><button class="btn-sm btn-pr" onclick="abrirModalServ(null)">+ Adicionar</button></div>
+<div class="acard" style="padding:0">
+  <div style="display:grid;grid-template-columns:2.5fr 1fr 1fr 70px;padding:9px 16px;font-size:10px;font-weight:700;color:var(--txt2);background:#f8f5f0;text-transform:uppercase;letter-spacing:.3px"><span>Nome</span><span>Duração</span><span>Preço</span><span>Ações</span></div>
+  ${SERVICOS.map(s=>`<div style="display:grid;grid-template-columns:2.5fr 1fr 1fr 70px;padding:11px 16px;border-bottom:1px solid #f8f5f0;align-items:center;font-size:13px;gap:6px">
+    <div><div style="font-weight:500">${s.emoji||"✂️"} ${s.nome}</div>${s.pacote?`<div style="font-size:10px;color:var(--gold)">📅 ${s.sessoes} sessões</div>`:""}</div>
+    <div style="color:var(--txt2)">${s.dur}</div>
+    <div style="font-weight:700;color:${s.preco===0?"#bbb":"var(--verde)"}">${s.preco===0?"incluso":fmtR(s.preco)}</div>
+    <div style="display:flex;gap:4px"><button class="btn-sm" style="background:#f0ece6" onclick="abrirModalServ(${s.id})">✏️</button><button class="btn-sm" style="background:var(--vermC);color:var(--verm)" onclick="excluirServ(${s.id})">✕</button></div>
+  </div>`).join("")}
+</div>`;
+}
+function abrirModalServ(id){
+  const s=id?SERVICOS.find(x=>x.id===id):null;
+  document.getElementById("m-serv-tit").textContent=s?"Editar serviço":"Adicionar serviço";
+  document.getElementById("m-serv-body").innerHTML=`
+    <div class="ca"><label>Nome *</label><input class="isml" id="ms-n" value="${s?.nome||""}" placeholder="Nome do serviço"></div>
+    <div class="g2">
+      <div class="ca"><label>Duração</label><input class="isml" id="ms-d" value="${s?.dur||"1h"}" placeholder="ex: 1h a 2h"></div>
+      <div class="ca"><label>Preço R$</label><input class="isml" id="ms-p" type="number" value="${s?.preco||0}"></div>
+    </div>
+    <div class="ca"><label>Descrição</label><textarea class="isml" id="ms-desc">${s?.desc||""}</textarea></div>
+    <button class="btn btn-pr" onclick="salvarServ(${id||0})">${s?"Salvar":"Adicionar"}</button>`;
+  abrirModal("m-serv");
+}
+function salvarServ(id){
+  const nome=document.getElementById("ms-n").value.trim();
+  if(!nome) return alert("Informe o nome!");
+  const d={nome,dur:document.getElementById("ms-d").value,preco:Number(document.getElementById("ms-p").value),desc:document.getElementById("ms-desc").value,emoji:"✂️"};
+  if(id){const s=SERVICOS.find(x=>x.id===id);if(s)Object.assign(s,d);}
+  else SERVICOS.push({id:gId(),...d});
+  fecharModal("m-serv"); renderAdmin("servicos"); renderCatalogo();
+}
+function excluirServ(id){if(confirm("Excluir este serviço?")){const i=SERVICOS.findIndex(s=>s.id===id);if(i>=0)SERVICOS.splice(i,1);renderAdmin("servicos");renderCatalogo();}}
+
+// ══════════════════════════════════════
+// ESTOQUE
+// ══════════════════════════════════════
+function pgEst(){
+  const lista=ESTOQUE.filter(p=>p.nome.toLowerCase().includes(estB.toLowerCase())||(p.marca||"").toLowerCase().includes(estB.toLowerCase()));
+  const alts=ESTOQUE.filter(p=>p.qtd===0||p.qtd/p.max<0.15);
+  return`
+<div class="pg-hdr"><div><div class="pg-tit">Estoque interno</div><div class="pg-sub">${ESTOQUE.length} produtos · ${alts.length} em alerta</div></div><button class="btn-sm btn-pr" onclick="abrirModalEst(null)">+ Adicionar</button></div>
+${alts.length?`<div class="alrt alrt-a">⚠️ Repor: ${alts.slice(0,4).map(p=>p.nome).join(" · ")}</div>`:""}
+<input class="isml" placeholder="Buscar produto..." value="${estB}" oninput="estB=this.value;renderAdmin('estoque')" style="margin-bottom:12px">
+<div class="acard" style="padding:0">
+  <div style="display:grid;grid-template-columns:2fr 1fr 2fr 1fr 80px;padding:9px 14px;font-size:10px;font-weight:700;color:var(--txt2);background:#f8f5f0;text-transform:uppercase;letter-spacing:.3px"><span>Produto</span><span>Nível</span><span>Barra</span><span>Custo</span><span>Ações</span></div>
+  ${lista.map(p=>{const pct=Math.round((p.qtd/Math.max(p.max,1))*100);const cor=pct===0?"var(--verm)":pct<15?"var(--ambar)":"var(--verde)";return`
+    <div style="display:grid;grid-template-columns:2fr 1fr 2fr 1fr 80px;padding:10px 14px;border-bottom:1px solid #f8f5f0;align-items:center;gap:6px">
+      <div><div style="font-size:13px;font-weight:500">${p.nome}</div>${p.marca?`<div style="font-size:10px;color:var(--txt3)">${p.marca}</div>`:""}</div>
+      <div style="font-size:13px;font-weight:700;color:${cor}">${p.qtd}/${p.max}</div>
+      <div style="display:flex;align-items:center;gap:5px"><button class="btn-sm" style="background:#f0ece6;padding:4px 8px" onclick="ajEst(${p.id},-1)">−</button><div class="bbar"><div class="bfill" style="width:${pct}%;background:${cor}"></div></div><button class="btn-sm" style="background:#f0ece6;padding:4px 8px" onclick="ajEst(${p.id},1)">+</button></div>
+      <div style="font-size:12px">${fmtR(p.custo)}</div>
+      <div style="display:flex;gap:4px"><button class="btn-sm" style="background:#f0ece6" onclick="abrirModalEst(${p.id})">✏️</button><button class="btn-sm" style="background:var(--vermC);color:var(--verm)" onclick="excluirEst(${p.id})">✕</button></div>
+    </div>`;}).join("")}
+</div>`;
+}
+function ajEst(id,d){const p=ESTOQUE.find(x=>x.id===id);if(p)p.qtd=Math.max(0,p.qtd+d);renderAdmin("estoque");}
+function abrirModalEst(id){
+  const p=id?ESTOQUE.find(x=>x.id===id):null;
+  document.getElementById("m-est-tit").textContent=p?"Editar produto":"Adicionar produto";
+  document.getElementById("m-est-body").innerHTML=`
+    <div class="g2">
+      <div class="ca"><label>Nome *</label><input class="isml" id="me-n" value="${p?.nome||""}" placeholder="Nome"></div>
+      <div class="ca"><label>Marca</label><input class="isml" id="me-m" value="${p?.marca||""}" placeholder="Marca"></div>
+      <div class="ca"><label>Qtd atual</label><input class="isml" id="me-q" type="number" min="0" value="${p?.qtd||0}"></div>
+      <div class="ca"><label>Qtd máxima</label><input class="isml" id="me-mx" type="number" min="1" value="${p?.max||100}"></div>
+      <div class="ca"><label>Custo R$</label><input class="isml" id="me-c" type="number" step="0.01" value="${p?.custo||0}"></div>
+    </div>
+    <button class="btn btn-pr" onclick="salvarEst(${id||0})">${p?"Salvar":"Adicionar"}</button>`;
+  abrirModal("m-est");
+}
+function salvarEst(id){
+  const nome=document.getElementById("me-n").value.trim();
+  if(!nome) return alert("Informe o nome!");
+  const d={nome,marca:document.getElementById("me-m").value.trim(),qtd:Number(document.getElementById("me-q").value),max:Number(document.getElementById("me-mx").value),custo:Number(document.getElementById("me-c").value)};
+  if(id){const i=ESTOQUE.findIndex(p=>p.id===id);if(i>=0)Object.assign(ESTOQUE[i],d);}
+  else ESTOQUE.push({id:gId(),...d});
+  fecharModal("m-est"); renderAdmin("estoque");
+}
+function excluirEst(id){if(confirm("Excluir?")){ESTOQUE=ESTOQUE.filter(p=>p.id!==id);renderAdmin("estoque");}}
+
+// ══════════════════════════════════════
+// FINANCEIRO
+// ══════════════════════════════════════
+function pgFin(){
+  const ent=AGS.filter(a=>!a.troca&&a.preco>0);
+  const rec=ent.filter(a=>a.pgto==="pago").reduce((s,a)=>s+Number(a.valorFinal||a.preco),0);
+  const fiad=ent.filter(a=>a.pgto==="fiado").reduce((s,a)=>s+Number(a.preco),0);
+  const pend=ent.filter(a=>!a.pgto).reduce((s,a)=>s+Number(a.preco),0);
+  const tP=CONTAS.filter(c=>!c.pago).reduce((s,c)=>s+Number(c.valor),0);
+  const tPago=CONTAS.filter(c=>c.pago).reduce((s,c)=>s+Number(c.valor),0);
+  const saldo=rec-tPago;
+  return`
+<div class="pg-hdr"><div class="pg-tit">Financeiro</div></div>
+<div class="metrics">
+  <div class="metric"><div class="m-l">Recebido</div><div class="m-v" style="color:var(--verde)">${fmtR(rec)}</div></div>
+  <div class="metric"><div class="m-l">Fiado</div><div class="m-v" style="color:var(--roxo)">${fmtR(fiad)}</div></div>
+  <div class="metric"><div class="m-l">Pendente</div><div class="m-v" style="color:var(--ambar)">${fmtR(pend)}</div></div>
+  <div class="metric"><div class="m-l">Contas</div><div class="m-v" style="color:var(--verm)">${fmtR(tP)}</div></div>
+  <div class="metric"><div class="m-l">Saldo</div><div class="m-v" style="color:${saldo>=0?"var(--verde)":"var(--verm)"}">${fmtR(saldo)}</div></div>
+</div>
+<div class="filtros">${[["entradas","Entradas"],["fiado","Fiado/Cobranças"],["contas","Contas a pagar"]].map(([v,l])=>`<button class="fbtn${finA===v?" on":""}" onclick="finA='${v}';renderAdmin('financeiro')">${l}</button>`).join("")}</div>
+${finA==="entradas"?`<div class="acard" style="padding:0">${ent.sort((a,b)=>(b.data+b.hora).localeCompare(a.data+a.hora)).map(a=>{const c=getCl(a.cliId);return`<div class="row" style="padding:10px 16px"><div class="r-main"><div class="r-nome">${nC(a.cliId)}</div><div class="r-sub">${fmtD(a.data)} · ${a.serv}${a.metodo?" · "+a.metodo:""}</div></div><div style="font-size:14px;font-weight:700;color:${a.pgto==="pago"?"var(--verde)":a.pgto==="fiado"?"var(--roxo)":"var(--ambar)"}">${fmtR(a.pgto==="pago"?(a.valorFinal||a.preco):a.preco)}</div>${bdg(a.pgto||"pendente")}${!a.pgto?`<button class="btn-sm" style="background:var(--verdeC);color:var(--verde);font-weight:700" onclick="abrirPgto(${a.id})">💰 Pagar</button>`:""}</div>`;}).join("")||`<div style="padding:18px;text-align:center;color:var(--txt3)">Nenhuma entrada.</div>`}</div>`:""}
+${finA==="fiado"?`<div class="acard" style="padding:0">${ent.filter(a=>a.pgto==="fiado").map(a=>{const c=getCl(a.cliId);return`<div class="row" style="padding:10px 16px"><div class="r-main"><div class="r-nome">${nC(a.cliId)}</div><div class="r-sub">${fmtD(a.data)} · ${a.serv}</div></div><div style="font-size:14px;font-weight:700;color:var(--roxo)">${fmtR(a.preco)}</div>${c.tel?`<button class="btn-sm" style="background:var(--roxoC);color:var(--roxo)" onclick="aWpp('${c.tel}','Olá, ${c.nome}! 😊\\n\\nPassando para lembrar do valor pendente:\\n💰 ${fmtR(a.preco)}\\n\\nObrigada! 💕')">Cobrar</button>`:""}<button class="btn-sm" style="background:var(--verdeC);color:var(--verde)" onclick="abrirPgto(${a.id})">Receber</button></div>`;}).join("")||`<div style="padding:18px;text-align:center;color:var(--txt3)">Nenhum fiado!</div>`}</div>`:""}
+${finA==="contas"?`<div style="display:flex;justify-content:flex-end;margin-bottom:8px"><button class="btn-sm btn-pr" onclick="abrirModalConta()">+ Adicionar conta</button></div>
+<div class="acard" style="padding:0">${CONTAS.sort((a,b)=>a.venc.localeCompare(b.venc)).map(c=>{const v=!c.pago&&c.venc<hoje();return`<div class="row" style="padding:10px 16px;${v?"background:#fff5f5":""}"><div class="r-main"><div class="r-nome">${c.desc} ${v?`<span class="badge b-al">vencida</span>`:""}</div><div class="r-sub">Venc: ${fmtD(c.venc)} · ${c.cat}</div></div><div style="font-size:14px;font-weight:700;color:${c.pago?"var(--verde)":"var(--verm)"}">${fmtR(c.valor)}</div>${!c.pago?`<button class="btn-sm" style="background:var(--verdeC);color:var(--verde)" onclick="pagarConta(${c.id})">Pago</button>`:`<span class="badge b-pago">pago</span>`}<button class="btn-sm" style="background:var(--vermC);color:var(--verm)" onclick="excluirConta(${c.id})">✕</button></div>`;}).join("")||`<div style="padding:18px;text-align:center;color:var(--txt3)">Nenhuma conta.</div>`}</div>`:""}`;
+}
+function abrirModalConta(){
+  document.getElementById("m-conta-body").innerHTML=`
+    <div class="g2"><div class="ca" style="grid-column:span 2"><label>Descrição *</label><input class="isml" id="mco-d" placeholder="Aluguel, luz..."></div>
+    <div class="ca"><label>Valor R$</label><input class="isml" id="mco-v" type="number"></div>
+    <div class="ca"><label>Vencimento</label><input class="isml" id="mco-vc" type="date" value="${hoje()}"></div>
+    <div class="ca"><label>Categoria</label><select class="isml" id="mco-c"><option>Fixo</option><option>Produto</option><option>Outro</option></select></div></div>
+    <button class="btn btn-pr" onclick="salvarConta()">Adicionar conta</button>`;
+  abrirModal("m-conta");
+}
+function salvarConta(){const d=document.getElementById("mco-d").value.trim();if(!d)return;CONTAS.push({id:gId(),desc:d,valor:Number(document.getElementById("mco-v").value),venc:document.getElementById("mco-vc").value,cat:document.getElementById("mco-c").value,pago:false});fecharModal("m-conta");renderAdmin("financeiro");}
+function pagarConta(id){const c=CONTAS.find(x=>x.id===id);if(c)c.pago=true;renderAdmin("financeiro");}
+function excluirConta(id){if(confirm("Excluir?")){CONTAS=CONTAS.filter(c=>c.id!==id);renderAdmin("financeiro");}}
+
+// ══════════════════════════════════════
+// MENSAGENS
+// ══════════════════════════════════════
+function msgConf(a){const c=getCl(a?.cliId);return`Olá, ${c.nome}! 😊\n\nSeu agendamento com *Evelyn Ramos* está confirmado!\n\n📅 *Data:* ${fmtD(a?.data)}\n⏰ *Horário:* ${a?.hora}\n✂️ *Serviço:* ${a?.serv}${a?.preco>0?"\n💰 *Valor:* "+fmtR(a?.preco)+" (5% desc. Pix/Dinheiro)":"\n💰 Sessão do seu pacote (já pago)"}\n📍 *Endereço:* ${ENDERECO}\n\n📋 *Combinados:*\n• Tolerância de 15 min de atraso\n• Cancelamentos: 5h de antecedência\n• No-show sem aviso: taxa de 50%\n\nTe espero! 💕`;}
+function msgPosP(c){return`Olá, ${c.nome}! 💆‍♀️\n\nFoi um prazer te atender!\n\n🌟 *Cuidados pós-progressiva:*\n• Não lave o cabelo por 72h\n• Não prenda nem use grampo por 3 dias\n• Evite umidade, suor e chuva\n• Use shampoo sem sal e sem sulfato\n• Não entre em piscina ou mar por 15 dias\n• Use protetor térmico sempre\n\nQualquer dúvida me chame! 💕`;}
+function msgPosL(c){return`Olá, ${c.nome}! ✨\n\nQue prazer te atender!\n\n💛 *Cuidados pós-loiro:*\n• Shampoo desamarelador 1×/semana\n• Hidratação semanal\n• Protetor térmico SEMPRE\n• Não lave nas primeiras 48h\n• Retoque a cada 30–45 dias\n\nFique linda! 💕`;}
+function msgSumida(c){return`Oi, ${c.nome}! 💕\n\nSentimos sua falta!\n\nFaz um tempinho que não te vejo e fiquei pensando em você 🥰\n\nTenho horários disponíveis essa semana!\n📍 ${ENDERECO}`;}
+function msgAniv(c){return`🎂 *Feliz aniversário, ${c.nome}!* 🎉\n\nUm dia incrível para você! 💕\n\n🎁 Você ganhou uma *ESCOVA GRÁTIS* no seu mês de aniversário!\n\nManda mensagem para agendar!\n📍 ${ENDERECO}`;}
+function msgVip(c){return`🌟 Parabéns, ${c.nome}! 👑\n\nVocê é minha cliente VIP!\n\n💆‍♀️ Você ganhou uma *HIDRATAÇÃO GRÁTIS* pela sua fidelidade!\n\nManda mensagem para agendar seu presente! 💕`;}
+function msgSatisf(c){return`Oi, ${c.nome}! 😊\n\nFoi um prazer te atender!\n\nGostaria de saber como foi sua experiência. Como você avalia o atendimento de hoje?\n\nSua opinião é muito importante! 💕`;}
+
+function pgMsg(){
+  const lim=new Date();lim.setDate(lim.getDate()-45);const ls=lim.toISOString().slice(0,10);
+  const sum=CLIENTES.filter(c=>!c.equipe&&c.tel).filter(c=>{const a=AGS.filter(x=>x.cliId===c.id);if(!a.length)return true;return a.map(x=>x.data).sort().reverse()[0]<ls;});
+  const mH=new Date().getMonth()+1;
+  const anv=CLIENTES.filter(c=>!c.equipe&&c.nasc&&c.tel&&parseInt(c.nasc.split("-")[1])===mH);
+  const sm=new Date();sm.setMonth(sm.getMonth()-6);const sms=sm.toISOString().slice(0,10);
+  const vips=CLIENTES.filter(c=>!c.equipe&&c.tel).map(c=>{const g=AGS.filter(a=>a.cliId===c.id&&a.pgto==="pago"&&a.data>=sms&&!a.troca).reduce((s,a)=>s+Number(a.valorFinal||a.preco),0);return{...c,g};}).filter(c=>c.g>0).sort((a,b)=>b.g-a.g).slice(0,5);
+  const progs=AGS.filter(a=>a.serv&&(a.serv.toLowerCase().includes("progressiva")||a.serv.toLowerCase().includes("horizon"))).map(a=>{const c=getCl(a.cliId);return c.tel?{...c,data:a.data,serv:a.serv}:null;}).filter(Boolean);
+  const loiros=AGS.filter(a=>a.serv&&a.serv.toLowerCase().includes("loiro")).map(a=>{const c=getCl(a.cliId);return c.tel?{...c,data:a.data,serv:a.serv}:null;}).filter(Boolean);
+  const novas=AGS.filter(a=>{const c=getCl(a.cliId);const ags=AGS.filter(x=>x.cliId===a.cliId);return ags.length===1&&c.tel;}).map(a=>{const c=getCl(a.cliId);return{...c,data:a.data};});
+
+  const rowM=(c,msg,lbl,cor="#25D366")=>`<div class="row" style="padding:10px 16px"><div class="av">${ini(c.nome+" "+(c.sob||""))}</div><div class="r-main"><div class="r-nome">${c.nome} ${c.sob||""}</div><div class="r-sub">${c.tel}${c.data?" · "+fmtD(c.data):""}${c.g?" · "+fmtR(c.g):""}</div></div><button class="btn-sm" style="background:${cor};color:#fff" onclick="aWpp('${c.tel}',\`${msg.replace(/`/g,"'").replace(/\n/g,"\\n")}\`)">${lbl}</button></div>`;
+  const abas=[["sumidas",`Sumidas (${sum.length})`],["aniv",`Aniversário (${anv.length})`],["vip",`VIP (${vips.length})`],["posP","Pós-progressiva"],["posL","Pós-loiro"],["satisf",`Novas (${novas.length})`],["capt","Captação"]];
+  return`
+<div class="pg-hdr"><div class="pg-tit">Mensagens automáticas</div></div>
+<div class="filtros">${abas.map(([v,l])=>`<button class="fbtn${msgA===v?" on":""}" onclick="msgA='${v}';renderAdmin('mensagens')">${l}</button>`).join("")}</div>
+<div class="acard" style="padding:0">
+${msgA==="sumidas"?(sum.length?sum.map(c=>rowM(c,msgSumida(c),"Chamar de volta","#C2185B")).join(""):`<div style="padding:18px;text-align:center;color:var(--txt3)">Nenhuma cliente sumida! 🎉</div>`):""}
+${msgA==="aniv"?(anv.length?anv.map(c=>rowM(c,msgAniv(c),"🎂 Parabéns","#C9A84C")).join(""):`<div style="padding:18px;text-align:center;color:var(--txt3)">Nenhuma aniversariante este mês.</div>`):""}
+${msgA==="vip"?(vips.length?vips.map(c=>rowM(c,msgVip(c),"👑 Presentear","#E65100")).join(""):`<div style="padding:18px;text-align:center;color:var(--txt3)">Nenhuma VIP ainda.</div>`):""}
+${msgA==="posP"?(progs.length?progs.map(c=>rowM(c,msgPosP(c),"Enviar cuidados","#7B1FA2")).join(""):`<div style="padding:18px;text-align:center;color:var(--txt3)">Nenhuma.</div>`):""}
+${msgA==="posL"?(loiros.length?loiros.map(c=>rowM(c,msgPosL(c),"Enviar cuidados","#E65100")).join(""):`<div style="padding:18px;text-align:center;color:var(--txt3)">Nenhuma.</div>`):""}
+${msgA==="satisf"?(novas.length?novas.map(c=>rowM(c,msgSatisf(c),"Pesquisa","#1565C0")).join(""):`<div style="padding:18px;text-align:center;color:var(--txt3)">Nenhuma cliente nova.</div>`):""}
+${msgA==="capt"?`<div style="padding:16px"><div style="background:#f8f5f0;border-radius:12px;padding:14px;font-size:13px;line-height:1.8;white-space:pre-wrap;margin-bottom:12px">✨ *Evelyn Ramos* — Cabeleireira
+São Carlos/SP
+
+💇‍♀️ Progressivas MY HORIZON
+🌟 Cronogramas Capilares Dicollore
+💅 Colorações e Transformações
+✂️ Corte Bordado e Escova
+💆‍♀️ Tratamentos CCRP e Botox Plus
+
+🗓️ Agende seu horário!
+📍 ${ENDERECO}
+
+Manda mensagem! 💕</div><button class="btn-sm btn-pr" onclick="navigator.clipboard.writeText(document.querySelector('.acard pre')||'texto copiado').catch(()=>alert('Copie o texto manualmente'))">Copiar texto</button></div>`:""}
+</div>`;
+}
+
+// ══════════════════════════════════════
+// METAS
+// ══════════════════════════════════════
+function pgMetas(){
+  const mes=new Date().toISOString().slice(0,7);
+  const rec=AGS.filter(a=>a.pgto==="pago"&&!a.troca&&a.data.startsWith(mes)).reduce((s,a)=>s+Number(a.valorFinal||a.preco),0);
+  const proj=AGS.filter(a=>!a.troca&&a.preco>0&&a.data.startsWith(mes)).reduce((s,a)=>s+Number(a.preco),0);
+  const falta=Math.max(0,META-rec);
+  const pct=Math.min(100,Math.round((rec/META)*100));
+  const pctP=Math.min(100,Math.round((proj/META)*100));
+  const pagos=AGS.filter(a=>a.pgto==="pago"&&!a.troca);
+  const ticket=pagos.length?pagos.reduce((s,a)=>s+Number(a.valorFinal||a.preco),0)/pagos.length:200;
+  const diasR=(()=>{const d=new Date();return new Date(d.getFullYear(),d.getMonth()+1,0).getDate()-d.getDate();})();
+  const rank={};pagos.forEach(a=>{rank[a.serv]=(rank[a.serv]||0)+Number(a.valorFinal||a.preco);});
+  const top=Object.entries(rank).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  return`
+<div class="pg-hdr"><div><div class="pg-tit">Metas e desempenho</div><div class="pg-sub">Meta: ${fmtR(META)}/mês</div></div></div>
+<div class="metrics">
+  <div class="metric"><div class="m-l">Recebido</div><div class="m-v" style="color:var(--verde)">${fmtR(rec)}</div></div>
+  <div class="metric"><div class="m-l">Projetado</div><div class="m-v" style="color:#1565C0">${fmtR(proj)}</div></div>
+  <div class="metric"><div class="m-l">Falta</div><div class="m-v" style="color:${falta>0?"var(--verm)":"var(--verde)"}">${fmtR(falta)}</div></div>
+</div>
+<div class="acard">
+  <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:7px"><span>Progresso real</span><span style="color:${pct>=100?"var(--verde)":"var(--pr)"}">${pct}%</span></div>
+  <div class="pmeta" style="margin-bottom:12px"><div class="pfill" style="width:${pct}%"></div></div>
+  <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:7px;color:var(--txt2)"><span>Projeção (agendado)</span><span style="color:#1565C0">${pctP}%</span></div>
+  <div class="pmeta"><div class="pfill" style="width:${pctP}%;background:#1565C0;opacity:.55"></div></div>
+</div>
+<div class="g2">
+  <div class="acard"><div class="acard-tit">Quantas clientes atender</div>
+    <div style="background:#f8f5f0;border-radius:10px;padding:12px;margin-bottom:10px"><div style="font-size:10px;color:var(--txt2);margin-bottom:3px;text-transform:uppercase">Ticket médio</div><div style="font-size:22px;font-weight:700;font-family:'Playfair Display',serif">${fmtR(ticket)}</div></div>
+    <div style="background:${falta>0?"var(--vermC)":"var(--verdeC)"};border-radius:10px;padding:12px">
+      <div style="font-size:10px;color:${falta>0?"var(--verm)":"var(--verde)"};margin-bottom:3px;text-transform:uppercase">Clientes necessárias</div>
+      <div style="font-size:26px;font-weight:700;color:${falta>0?"var(--verm)":"var(--verde)"};font-family:'Playfair Display',serif">${falta>0?Math.ceil(falta/ticket):"Meta atingida! 🎉"}</div>
+      ${falta>0&&diasR>0?`<div style="font-size:11px;color:var(--verm);margin-top:3px">${fmtR(falta/diasR)}/dia · ${diasR} dias restantes</div>`:""}
+    </div>
+  </div>
+  <div class="acard"><div class="acard-tit">Top serviços (receita)</div>
+    ${top.length?top.map(([n,v],i)=>`<div style="display:flex;align-items:center;gap:8px;margin-bottom:11px"><div style="width:20px;height:20px;border-radius:50%;background:var(--pr);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">${i+1}</div><div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:500;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${n}</div><div style="height:5px;background:#e8e4df;border-radius:3px;overflow:hidden"><div style="height:5px;width:${Math.round((v/(top[0][1]||1))*100)}%;background:var(--gold);border-radius:3px"></div></div></div><div style="font-size:12px;font-weight:700;color:var(--verde);flex-shrink:0">${fmtR(v)}</div></div>`).join(""):`<div style="color:var(--txt3);font-size:13px">Sem pagamentos ainda.</div>`}
+  </div>
+</div>`;
+}
+
+// ══════════════════════════════════════
+// WHATSAPP / META
+// ══════════════════════════════════════
+function pgWpp(){return`
+<div class="pg-hdr"><div><div class="pg-tit">WhatsApp / Meta API</div><div class="pg-sub">Integração para envio automático</div></div></div>
+<div class="acard" style="background:var(--verdeC);border-color:#A5D6B0">
+  <div style="font-weight:700;color:var(--verde);margin-bottom:6px">✅ Como funciona agora</div>
+  <div style="font-size:13px;color:#2E7D32;line-height:1.8">Cada botão de mensagem abre o WhatsApp com o texto já pronto — você só clica em enviar. Para envios 100% automáticos (sem clicar), conecte a API do Meta abaixo.</div>
+</div>
+<div class="acard">
+  <div class="acard-tit">🔗 Passo a passo para ativar</div>
+  <div style="font-size:13px;color:var(--txt2);line-height:2">
+    <strong>1.</strong> Acesse <a href="https://business.facebook.com" target="_blank" style="color:var(--pr);font-weight:600">business.facebook.com</a> → crie conta Meta Business gratuita<br>
+    <strong>2.</strong> Vá em <strong>WhatsApp → Primeiros passos</strong> → adicione seu número<br>
+    <strong>3.</strong> Acesse <a href="https://developers.facebook.com" target="_blank" style="color:var(--pr);font-weight:600">developers.facebook.com</a> → crie um App → adicione produto <strong>WhatsApp</strong><br>
+    <strong>4.</strong> Gere um <strong>Token de Acesso</strong> e copie seu <strong>Phone Number ID</strong><br>
+    <strong>5.</strong> Cole os dados abaixo e salve
+  </div>
+</div>
+<div class="acard">
+  <div class="acard-tit">⚙️ Configuração</div>
+  <div class="ca"><label>Phone Number ID</label><input class="isml" id="meta-pid" placeholder="Ex: 123456789" value="${window._mPid||""}"></div>
+  <div class="ca"><label>Token de Acesso</label><input class="isml" id="meta-tok" placeholder="EAAxxxxx..." value="${window._mTok||""}"></div>
+  <div style="background:var(--goldC);border-radius:10px;padding:10px 13px;font-size:12px;color:#7a5c00;margin:10px 0">⚠️ O token expira em 24h em modo de teste. Para produção, configure um token permanente no painel Meta.</div>
+  <button class="btn btn-pr" style="width:auto;padding:10px 22px" onclick="window._mPid=document.getElementById('meta-pid').value;window._mTok=document.getElementById('meta-tok').value;alert('Configuração salva!')">Salvar configuração</button>
+</div>
+<div class="acard">
+  <div class="acard-tit">📋 Mensagens configuradas</div>
+  <div style="font-size:13px;color:var(--txt2);line-height:2.2">
+    ✅ Confirmação de agendamento<br>✅ Pós-progressiva<br>✅ Pós-loiro<br>✅ Clientes sumidas (+45 dias)<br>✅ Aniversariantes do mês<br>✅ Clientes VIP — hidratação grátis<br>✅ Pesquisa de satisfação (novas clientes)<br>✅ Captação de novas clientes
+  </div>
+</div>`;}
+
+// ══════════════════════════════════════
+// CONFIGURAÇÕES
+// ══════════════════════════════════════
+function pgConfig(){return`
+<div class="pg-hdr"><div class="pg-tit">Configurações</div></div>
+<div class="acard">
+  <div class="acard-tit">Taxas da máquina de cartão</div>
+  <div class="g2">
+    <div class="ca"><label>Taxa débito (%)</label><input class="isml" id="cf-d" type="number" step="0.01" value="${TAXAS.deb}"></div>
+    <div class="ca"><label>Taxa crédito (%)</label><input class="isml" id="cf-c" type="number" step="0.01" value="${TAXAS.cred}"></div>
+  </div>
+  <div style="font-size:12px;color:var(--txt2);margin-bottom:10px">Desconto Pix/Dinheiro: ${DESCONTO_PIX}% (fixo)</div>
+  <button class="btn btn-pr" style="width:auto;padding:10px 22px" onclick="TAXAS.deb=Number(document.getElementById('cf-d').value);TAXAS.cred=Number(document.getElementById('cf-c').value);alert('Taxas salvas!')">Salvar taxas</button>
+</div>
+<div class="acard">
+  <div class="acard-tit">Meta mensal</div>
+  <div class="ca"><label>Meta R$</label><input class="isml" id="cf-m" type="number" value="${META}" style="max-width:220px"></div>
+  <button class="btn btn-pr" style="width:auto;padding:10px 22px" onclick="META=Number(document.getElementById('cf-m').value);alert('Meta de '+fmtR(META)+' salva!')">Salvar meta</button>
+</div>
+<div class="acard">
+  <div class="acard-tit">🌐 Colocar o app no ar — GitHub + Vercel</div>
+  <div style="font-size:13px;color:var(--txt2);line-height:2.2">
+    <strong>1.</strong> Acesse <a href="https://github.com" target="_blank" style="color:var(--pr);font-weight:600">github.com</a> → crie uma conta gratuita com seu e-mail<br>
+    <strong>2.</strong> Clique em <strong>"New"</strong> (botão verde) → nome do repositório: <code style="background:#f0ece6;padding:2px 6px;border-radius:4px">evelyn-salao</code> → marque <strong>Public</strong> → clique <strong>"Create repository"</strong><br>
+    <strong>3.</strong> Na próxima tela, clique em <strong>"uploading an existing file"</strong> → arraste o arquivo <code style="background:#f0ece6;padding:2px 6px;border-radius:4px">index.html</code><br>
+    <strong>4.</strong> Role para baixo → clique <strong>"Commit changes"</strong><br>
+    <strong>5.</strong> Acesse <a href="https://vercel.com" target="_blank" style="color:var(--pr);font-weight:600">vercel.com</a> → <strong>"Continue with GitHub"</strong> → autorize<br>
+    <strong>6.</strong> Clique <strong>"Add New → Project"</strong> → escolha <strong>evelyn-salao</strong> → clique <strong>"Deploy"</strong><br>
+    <strong>7.</strong> Em 1 minuto seu link estará no ar! Copie e compartilhe com suas clientes 🎉
+  </div>
+  <div style="margin-top:12px;background:var(--goldC);border-radius:10px;padding:12px 14px;font-size:13px;color:#7a5c00">
+    💡 Seu link ficará: <strong>evelyn-salao.vercel.app</strong><br>
+    Para personalizar o nome, vá em Vercel → Settings → Domains
+  </div>
+</div>`;}
+
+// ══════════════════════════════════════
+// INIT
+// ══════════════════════════════════════
+renderCatalogo();
+document.getElementById("c-data").min = hoje();
+</script>
+</body>
+</html>
